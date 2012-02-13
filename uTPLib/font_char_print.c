@@ -7,7 +7,7 @@ void font_char_print(coord_t x, coord_t y, color_t color, char c)
         return;
     }
 
-    const prog_uint8_t *font_data = font[(int)c];
+    const prog_uint8_t *font_data = &font[(int)c-32][0];
 
     if( x < -FONT_WIDTH) {
         return;
