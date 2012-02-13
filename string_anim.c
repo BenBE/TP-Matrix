@@ -6,13 +6,15 @@
 void string_doanim(char *s, timebase_t wait_after, color_t color)
 {
     coord_t x = DISPLAY_WIDTH;
-    coord_t y = 0;
+    coord_t y = 1;
 
-    while(*s && (x > -FONT_WIDTH)) 
+    while(*s && (1 || (x > -FONT_WIDTH))) 
     {
+        display_clear_black();
         font_string_printX(x, y, color, s);
+        display_buffer_swap(0);
 
-        delay_ms(20);
+        delay_ms(75);
 
         x--;
         if(x < -FONT_WIDTH)
