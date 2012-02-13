@@ -14,7 +14,7 @@ extern "C" {
 #define DISPLAY_BUFFERS	2
 
 #define FONT_WIDTH	5
-#define FONT_HEIGHT	8
+#define FONT_HEIGHT	6
 
 typedef int8_t coord_t;
 typedef uint8_t color_t;
