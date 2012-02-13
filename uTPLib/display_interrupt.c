@@ -21,31 +21,15 @@ static inline void pixel_to_matrix(register unsigned char pixel) {
 
   pixel = PORTB & ~0x28;
   PORTB = pixel += b;
-  asm volatile ("nop\nnop\n" ::: "memory");
-  asm volatile ("nop\nnop\n" ::: "memory");
   PORTB = pixel + 0x20;
-  asm volatile ("nop\nnop\n" ::: "memory");
-  asm volatile ("nop\nnop\n" ::: "memory");
   PORTB = pixel -= b;
-  asm volatile ("nop\nnop\n" ::: "memory");
-  asm volatile ("nop\nnop\n" ::: "memory");
 
   PORTB = pixel += g;
-  asm volatile ("nop\nnop\n" ::: "memory");
-  asm volatile ("nop\nnop\n" ::: "memory");
   PORTB = pixel + 0x20;
-  asm volatile ("nop\nnop\n" ::: "memory");
-  asm volatile ("nop\nnop\n" ::: "memory");
   PORTB = pixel -= g;
-  asm volatile ("nop\nnop\n" ::: "memory");
-  asm volatile ("nop\nnop\n" ::: "memory");
 
   PORTB = pixel += r;
-  asm volatile ("nop\nnop\n" ::: "memory");
-  asm volatile ("nop\nnop\n" ::: "memory");
   PORTB = pixel + 0x20;
-  asm volatile ("nop\nnop\n" ::: "memory");
-  asm volatile ("nop\nnop\n" ::: "memory");
   PORTB = pixel - r;
 }
 
