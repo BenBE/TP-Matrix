@@ -6,7 +6,7 @@ void display_pixel_set(coord_t x, coord_t y, color_t color)
     {
         return;
     }
-    if((0 > y) || (y >= DISPLAY_WIDTH))
+    if((0 > y) || (y >= DISPLAY_HEIGHT))
     {
         return;
     }
