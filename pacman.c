@@ -3,80 +3,78 @@
 
 #include "main.h"
 
-const prog_uint8_t gespenst_pixel[8][9] =
+const prog_uint8_t gespenst_pixel[8][9] = {
+    {0, 0, 1, 1, 1, 1, 1, 0, 0},
+    {0, 1, 1, 1, 1, 1, 1, 1, 0},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 1, 0, 1, 0, 1, 0, 1}
+};
+
+const prog_uint8_t pacman_gefressen_pixel [6][6][6] = {
     {
-        {0, 0, 1, 1, 1, 1, 1, 0, 0},
-        {0, 1, 1, 1, 1, 1, 1, 1, 0},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1, 1, 1, 1},
-        {1, 0, 1, 0, 1, 0, 1, 0, 1}
-    };
+        {0, 1, 0, 0, 1, 0},
+        {1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1},
+        {0, 1, 1, 1, 1, 0}
+    },
 
-const prog_uint8_t pacman_gefressen_pixel [6][6][6] =
     {
-        {
-            {0, 1, 0, 0, 1, 0},
-            {1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1},
-            {0, 1, 1, 1, 1, 0}
-        },
+        {0, 0, 0, 0, 0, 0},
+        {1, 1, 0, 0, 1, 1},
+        {1, 1, 0, 0, 1, 1},
+        {1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1},
+        {0, 1, 1, 1, 1, 0}
+    },
 
-        {
-            {0, 0, 0, 0, 0, 0},
-            {1, 1, 0, 0, 1, 1},
-            {1, 1, 0, 0, 1, 1},
-            {1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1},
-            {0, 1, 1, 1, 1, 0}
-        },
+    {
+        {0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0},
+        {1, 1, 0, 0, 1, 1},
+        {1, 1, 1, 1, 1, 1},
+        {1, 1, 1, 1, 1, 1},
+        {0, 1, 1, 1, 1, 0}
+    },
 
-        {
-            {0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0},
-            {1, 1, 0, 0, 1, 1},
-            {1, 1, 1, 1, 1, 1},
-            {1, 1, 1, 1, 1, 1},
-            {0, 1, 1, 1, 1, 0}
-        },
+    {
+        {0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0},
+        {0, 1, 1, 1, 1, 0},
+        {1, 1, 1, 1, 1, 1},
+        {0, 1, 1, 1, 1, 0}
+    },
 
-        {
-            {0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0},
-            {0, 1, 1, 1, 1, 0},
-            {1, 1, 1, 1, 1, 1},
-            {0, 1, 1, 1, 1, 0}
-        },
+    {
+        {0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0},
+        {0, 0, 1, 1, 0, 0},
+        {0, 1, 1, 1, 1, 0},
+        {0, 1, 1, 1, 1, 0}
+    },
 
-        {
-            {0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0},
-            {0, 0, 1, 1, 0, 0},
-            {0, 1, 1, 1, 1, 0},
-            {0, 1, 1, 1, 1, 0}
-        },
-
-        {
-            {0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0},
-            {0, 0, 1, 1, 0, 0},
-            {0, 0, 1, 1, 0, 0},
-            {0, 0, 1, 1, 0, 0}
-        }
-    };
+    {
+        {0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0},
+        {0, 0, 0, 0, 0, 0},
+        {0, 0, 1, 1, 0, 0},
+        {0, 0, 1, 1, 0, 0},
+        {0, 0, 1, 1, 0, 0}
+    }
+};
 
 
 void pacman()
 {
     display_buffer_swap (1); //bildschirm leeren
-//    randomSeed (micros() );
+    //    randomSeed (micros() );
 
     uint8_t richtung = 1;
     uint8_t gespenst = random_range (0, 4);
@@ -104,10 +102,10 @@ void pacman()
             display_buffer_swap (2);
 
             if (j > 0) {
-                display_pixel_set (2 + (i * 4), punkte_pos[j - 1], display_color_from_rgb( 0, 0, 0 ) );
+                display_pixel_set (2 + (i * 4), punkte_pos[j - 1], display_color_from_rgb ( 0, 0, 0 ) );
             }
 
-            display_pixel_set (2 + (i * 4), punkte_pos[j], display_color_from_rgb( 255, 255, 255 ) );
+            display_pixel_set (2 + (i * 4), punkte_pos[j], display_color_from_rgb ( 255, 255, 255 ) );
             delay_ms (30);
         }
 
@@ -168,7 +166,7 @@ void pacman()
             }
 
             if (punkte[i]) {
-                display_pixel_set (x_pos, 3, display_color_from_rgb( 255, 255, 255 ) );
+                display_pixel_set (x_pos, 3, display_color_from_rgb ( 255, 255, 255 ) );
             }
         }
 
@@ -176,26 +174,26 @@ void pacman()
 
             //pacman malen
             if (pacman_status < 4) {
-                display_pixel_set (pacman_pos - 4, 1, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 3, 1, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 2, 1, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 1, 1, display_color_from_rgb( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 4, 1, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 3, 1, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 2, 1, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 1, 1, display_color_from_rgb ( 255, 255, 0 ) );
 
-                display_pixel_set (pacman_pos - 5, 2, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 4, 2, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 3, 2, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 2, 2, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 1, 2, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos    , 2, display_color_from_rgb( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 5, 2, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 4, 2, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 3, 2, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 2, 2, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 1, 2, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos    , 2, display_color_from_rgb ( 255, 255, 0 ) );
 
-                display_pixel_set (pacman_pos - 5, 3, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 4, 3, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 3, 3, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 2, 3, display_color_from_rgb( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 5, 3, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 4, 3, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 3, 3, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 2, 3, display_color_from_rgb ( 255, 255, 0 ) );
 
-                display_pixel_set (pacman_pos - 5, 4, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 4, 4, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 3, 4, display_color_from_rgb( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 5, 4, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 4, 4, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 3, 4, display_color_from_rgb ( 255, 255, 0 ) );
 
 
 
@@ -223,35 +221,35 @@ void pacman()
                 if (pacman_status == 0) {
                     pacman_status = 1;
                 } else if (pacman_status == 1) {
-                    display_pixel_set (pacman_pos - 1, 3, display_color_from_rgb( 255, 255, 0 ) );
-                    display_pixel_set (pacman_pos    , 3, display_color_from_rgb( 255, 255, 0 ) );
+                    display_pixel_set (pacman_pos - 1, 3, display_color_from_rgb ( 255, 255, 0 ) );
+                    display_pixel_set (pacman_pos    , 3, display_color_from_rgb ( 255, 255, 0 ) );
                     pacman_status = 2;
                 } else if (pacman_status == 2) {
-                    display_pixel_set (pacman_pos - 2, 3, display_color_from_rgb( 255, 255, 0 ) );
-                    display_pixel_set (pacman_pos - 1, 3, display_color_from_rgb( 255, 255, 0 ) );
-                    display_pixel_set (pacman_pos    , 3, display_color_from_rgb( 255, 255, 0 ) );
-                    display_pixel_set (pacman_pos - 2, 4, display_color_from_rgb( 255, 255, 0 ) );
-                    display_pixel_set (pacman_pos - 1, 4, display_color_from_rgb( 255, 255, 0 ) );
-                    display_pixel_set (pacman_pos    , 4, display_color_from_rgb( 255, 255, 0 ) );
+                    display_pixel_set (pacman_pos - 2, 3, display_color_from_rgb ( 255, 255, 0 ) );
+                    display_pixel_set (pacman_pos - 1, 3, display_color_from_rgb ( 255, 255, 0 ) );
+                    display_pixel_set (pacman_pos    , 3, display_color_from_rgb ( 255, 255, 0 ) );
+                    display_pixel_set (pacman_pos - 2, 4, display_color_from_rgb ( 255, 255, 0 ) );
+                    display_pixel_set (pacman_pos - 1, 4, display_color_from_rgb ( 255, 255, 0 ) );
+                    display_pixel_set (pacman_pos    , 4, display_color_from_rgb ( 255, 255, 0 ) );
                     pacman_status = 3;
                 } else if (pacman_status == 3) {
-                    display_pixel_set (pacman_pos - 1, 3, display_color_from_rgb( 255, 255, 0 ) );
-                    display_pixel_set (pacman_pos    , 3, display_color_from_rgb( 255, 255, 0 ) );
+                    display_pixel_set (pacman_pos - 1, 3, display_color_from_rgb ( 255, 255, 0 ) );
+                    display_pixel_set (pacman_pos    , 3, display_color_from_rgb ( 255, 255, 0 ) );
                     pacman_status = 0;
                 }
 
 
-                display_pixel_set (pacman_pos - 5, 5, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 4, 5, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 3, 5, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 2, 5, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 1, 5, display_color_from_rgb( 255, 255, 0 ) );
-                display_pixel_set (pacman_pos    , 5, display_color_from_rgb( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 5, 5, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 4, 5, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 3, 5, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 2, 5, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 1, 5, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos    , 5, display_color_from_rgb ( 255, 255, 0 ) );
 
-                display_pixel_set (pacman_pos - 4, 6, display_color_from_rgb(255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 3, 6, display_color_from_rgb(255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 2, 6, display_color_from_rgb(255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 1, 6, display_color_from_rgb(255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 4, 6, display_color_from_rgb (255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 3, 6, display_color_from_rgb (255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 2, 6, display_color_from_rgb (255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 1, 6, display_color_from_rgb (255, 255, 0 ) );
 
 
                 if ( (pacman_pos + 1) % 4 == 0) {
@@ -263,29 +261,29 @@ void pacman()
                 if (pacman_pos > gespenst_pacman_offset) {
                     for (int i = 0; i < 8; i++) {
                         for (int j = 0; j < 9; j++) {
-                            if ( pgm_read_byte( &gespenst_pixel[i][j] ) ) {
-                                display_pixel_set (gespenst_pos - j, i, display_color_from_rgb( gespenst_r, gespenst_g, gespenst_b ));
+                            if ( pgm_read_byte ( &gespenst_pixel[i][j] ) ) {
+                                display_pixel_set (gespenst_pos - j, i, display_color_from_rgb ( gespenst_r, gespenst_g, gespenst_b ) );
                             }
                         }
                     }
 
                     //augen malen
-                    display_pixel_set (gespenst_pos - 2, 2, display_color_from_rgb( 255, 255, 255 ));
-                    display_pixel_set (gespenst_pos - 3, 3, display_color_from_rgb( 255, 255, 255 ));
-                    display_pixel_set (gespenst_pos - 3, 2, display_color_from_rgb( 255, 255, 255 ));
-                    display_pixel_set (gespenst_pos - 2, 3, display_color_from_rgb(   0,   0,   0 ));
+                    display_pixel_set (gespenst_pos - 2, 2, display_color_from_rgb ( 255, 255, 255 ) );
+                    display_pixel_set (gespenst_pos - 3, 3, display_color_from_rgb ( 255, 255, 255 ) );
+                    display_pixel_set (gespenst_pos - 3, 2, display_color_from_rgb ( 255, 255, 255 ) );
+                    display_pixel_set (gespenst_pos - 2, 3, display_color_from_rgb (   0,   0,   0 ) );
 
-                    display_pixel_set (gespenst_pos - 5, 2, display_color_from_rgb( 255, 255, 255 ));
-                    display_pixel_set (gespenst_pos - 6, 3, display_color_from_rgb( 255, 255, 255 ));
-                    display_pixel_set (gespenst_pos - 6, 2, display_color_from_rgb( 255, 255, 255 ));
-                    display_pixel_set (gespenst_pos - 5, 3, display_color_from_rgb(   0,   0,   0 ));
+                    display_pixel_set (gespenst_pos - 5, 2, display_color_from_rgb ( 255, 255, 255 ) );
+                    display_pixel_set (gespenst_pos - 6, 3, display_color_from_rgb ( 255, 255, 255 ) );
+                    display_pixel_set (gespenst_pos - 6, 2, display_color_from_rgb ( 255, 255, 255 ) );
+                    display_pixel_set (gespenst_pos - 5, 3, display_color_from_rgb (   0,   0,   0 ) );
 
                     if (!gespenst_status) {
                         for (int f = 0; f < 9; f++) {
                             if (f % 2 == 0) {
-                                display_pixel_set (gespenst_pos - f, 7, display_color_from_rgb( 0, 0, 0 ));
+                                display_pixel_set (gespenst_pos - f, 7, display_color_from_rgb ( 0, 0, 0 ) );
                             } else {
-                                display_pixel_set (gespenst_pos - f, 7, display_color_from_rgb( gespenst_r, gespenst_g, gespenst_b ));
+                                display_pixel_set (gespenst_pos - f, 7, display_color_from_rgb ( gespenst_r, gespenst_g, gespenst_b ) );
                             }
                         }
                     }
@@ -308,8 +306,8 @@ void pacman()
 
                 for (int n = 0; n < 6; n++) {
                     for (int m = 0; m < 6; m++) {
-                        if ( (pacman_status < 9) && pgm_read_byte( &pacman_gefressen_pixel[pacman_status - 4][m][n]) ) {
-                            display_pixel_set (pacman_pos - 5 + n, m, display_color_from_rgb( 255, 255, 0 ));
+                        if ( (pacman_status < 9) && pgm_read_byte ( &pacman_gefressen_pixel[pacman_status - 4][m][n]) ) {
+                            display_pixel_set (pacman_pos - 5 + n, m, display_color_from_rgb ( 255, 255, 0 ) );
                         }
                     }
                 }

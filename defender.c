@@ -68,12 +68,12 @@ void defender()
             shipdy = -shipdy;
         }
 
-        display_pixel_set (shipx - 1         , shipy    , display_color_from_rgb( 200, 255, 255 ) );
-        display_pixel_set (shipx             , shipy    , display_color_from_rgb( 200, 255, 255 ) );
-        display_pixel_set (shipx + 1         , shipy    , display_color_from_rgb( 200, 255, 255 ) );
-        display_pixel_set (shipx + 2 * shipdx, shipy    , display_color_from_rgb( 200, 255, 255 ) );
-        display_pixel_set (shipx - shipdx    , shipy - 1, display_color_from_rgb( 200, 255, 255 ) );
-        display_pixel_set (shipx             , shipy - 1, display_color_from_rgb( 255, 196,  60 ) );
+        display_pixel_set (shipx - 1         , shipy    , display_color_from_rgb ( 200, 255, 255 ) );
+        display_pixel_set (shipx             , shipy    , display_color_from_rgb ( 200, 255, 255 ) );
+        display_pixel_set (shipx + 1         , shipy    , display_color_from_rgb ( 200, 255, 255 ) );
+        display_pixel_set (shipx + 2 * shipdx, shipy    , display_color_from_rgb ( 200, 255, 255 ) );
+        display_pixel_set (shipx - shipdx    , shipy - 1, display_color_from_rgb ( 200, 255, 255 ) );
+        display_pixel_set (shipx             , shipy - 1, display_color_from_rgb ( 255, 196,  60 ) );
 
         // shot
         shotx += shotdx * 2;
@@ -87,7 +87,7 @@ void defender()
         for (int i = 1, xx = shotx; i <= shotlen; i++, xx += shotdx) {
             int j = i * 255 / shotlen;
             int x = shotx + xx - 4 * shotdx;
-            display_pixel_set (x, shoty, display_color_from_rgb(j, j, j));
+            display_pixel_set (x, shoty, display_color_from_rgb (j, j, j) );
 
             for (int i = 0; i < ENEMn; i++) {
                 struct enem *e = &enems[i];
@@ -111,7 +111,7 @@ void defender()
             for (int xpl_x = -1; xpl_x <= 1; xpl_x++) {
                 for (int xpl_y = -1; xpl_y <= 1; xpl_y++) {
                     //for (int i=0; i<2; i++)
-                    display_pixel_set (xplx + xpl_x * xpld, xply + xpl_y * xpld, display_color_from_rgb( 255, 255, 0 ) );
+                    display_pixel_set (xplx + xpl_x * xpld, xply + xpl_y * xpld, display_color_from_rgb ( 255, 255, 0 ) );
                 }
 
                 xpld++;
@@ -144,10 +144,10 @@ void defender()
                 }
             }
 
-            display_pixel_set (e->x    , e->y - 1, display_color_from_rgb( e->r, e->g, e->b ) );
-            display_pixel_set (e->x - 1, e->y    , display_color_from_rgb( e->r, e->g, e->b ) );
-            display_pixel_set (e->x    , e->y    , display_color_from_rgb( e->r, e->g, e->b ) );
-            display_pixel_set (e->x + 1, e->y    , display_color_from_rgb( e->r, e->g, e->b ) );
+            display_pixel_set (e->x    , e->y - 1, display_color_from_rgb ( e->r, e->g, e->b ) );
+            display_pixel_set (e->x - 1, e->y    , display_color_from_rgb ( e->r, e->g, e->b ) );
+            display_pixel_set (e->x    , e->y    , display_color_from_rgb ( e->r, e->g, e->b ) );
+            display_pixel_set (e->x + 1, e->y    , display_color_from_rgb ( e->r, e->g, e->b ) );
             //my_paint(e->x  ,e->y+1,e->r,e->g,e->b);
         }
     }

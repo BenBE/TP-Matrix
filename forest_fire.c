@@ -12,7 +12,7 @@ void forest_fire()
         for (int y = 0; y < DISPLAY_HEIGHT; y++) {
             cell = random_range (0, 2);
             forest[x][y] = cell;
-            display_pixel_set (x, y, display_color_from_rgb( cell > 1 ? 255 : 0, cell > 0 ? 127 : 0, 0 ) );
+            display_pixel_set (x, y, display_color_from_rgb ( cell > 1 ? 255 : 0, cell > 0 ? 127 : 0, 0 ) );
         }
 
         //        display_buffer_swap(2);
@@ -53,7 +53,7 @@ stop_neighbours:
                 }
 
                 forest[x][y] = (forest[x][y] & 3) | (cell << 2); // save new value
-                display_pixel_set (x, y, display_color_from_rgb( cell > 1 ? 255 : 0, cell > 0 ? 127 : 0, 0 ) );
+                display_pixel_set (x, y, display_color_from_rgb ( cell > 1 ? 255 : 0, cell > 0 ? 127 : 0, 0 ) );
             }
         }
 
