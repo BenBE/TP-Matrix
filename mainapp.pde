@@ -26,4 +26,7 @@ void loop()
     string_anim (2);
     defender();
     string_anim (3);
+    leuchtturm();
+    string_anim (4);
+
 }

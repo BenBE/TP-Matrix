@@ -15,6 +15,8 @@ void defender(void);
 void string_anim(char id);
 void heart(void);
 
+void leuchtturm(void);
+
 #ifdef __cplusplus
 }
 #endif
