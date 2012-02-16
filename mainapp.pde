@@ -28,5 +28,7 @@ void loop()
     string_anim (3);
     leuchtturm();
     string_anim (4);
+    matrix_code();
+    string_anim (5);
 
 }

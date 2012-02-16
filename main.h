@@ -16,6 +16,7 @@ void string_anim(char id);
 void heart(void);
 
 void leuchtturm(void);
+void matrix_code(void);
 
 #ifdef __cplusplus
 }
