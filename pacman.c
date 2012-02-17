@@ -3,73 +3,17 @@
 
 #include "main.h"
 
-const prog_uint8_t gespenst_pixel[8][9] = {
-    {0, 0, 1, 1, 1, 1, 1, 0, 0},
-    {0, 1, 1, 1, 1, 1, 1, 1, 0},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 1, 0, 1, 0, 1, 0, 1}
+const prog_uint8_t gespenst_sprite[9] =
+    {0xFC, 0x7E, 0xFF, 0x7F, 0xFF, 0x7F, 0xFF, 0x7E, 0xFC};
+
+const prog_uint8_t pacman_gefressen_sprite [6][6] = {
+    {0x1E, 0x3F, 0x1E, 0x1E, 0x3F, 0x1E},
+    {0x1E, 0x3E, 0x38, 0x38, 0x3E, 0x1E},
+    {0x1C, 0x3C, 0x38, 0x38, 0x3C, 0x1C},
+    {0x10, 0x38, 0x38, 0x38, 0x38, 0x10},
+    {0x00, 0x30, 0x38, 0x38, 0x30, 0x00},
+    {0x00, 0x00, 0x38, 0x38, 0x00, 0x00}
 };
-
-const prog_uint8_t pacman_gefressen_pixel [6][6][6] = {
-    {
-        {0, 1, 0, 0, 1, 0},
-        {1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1},
-        {0, 1, 1, 1, 1, 0}
-    },
-
-    {
-        {0, 0, 0, 0, 0, 0},
-        {1, 1, 0, 0, 1, 1},
-        {1, 1, 0, 0, 1, 1},
-        {1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1},
-        {0, 1, 1, 1, 1, 0}
-    },
-
-    {
-        {0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0},
-        {1, 1, 0, 0, 1, 1},
-        {1, 1, 1, 1, 1, 1},
-        {1, 1, 1, 1, 1, 1},
-        {0, 1, 1, 1, 1, 0}
-    },
-
-    {
-        {0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0},
-        {0, 1, 1, 1, 1, 0},
-        {1, 1, 1, 1, 1, 1},
-        {0, 1, 1, 1, 1, 0}
-    },
-
-    {
-        {0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0},
-        {0, 0, 1, 1, 0, 0},
-        {0, 1, 1, 1, 1, 0},
-        {0, 1, 1, 1, 1, 0}
-    },
-
-    {
-        {0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0},
-        {0, 0, 0, 0, 0, 0},
-        {0, 0, 1, 1, 0, 0},
-        {0, 0, 1, 1, 0, 0},
-        {0, 0, 1, 1, 0, 0}
-    }
-};
-
 
 void pacman()
 {
@@ -79,15 +23,9 @@ void pacman()
     uint8_t richtung = 1;
     uint8_t gespenst = random_range (0, 4);
 
-    uint8_t gespenst_frisst_pacman = 0;
+    uint8_t gespenst_frisst_pacman = 1 < random_range (1, 4);
 
-    if (random_range (1, 4) > 1) {
-        gespenst_frisst_pacman = 1;
-    }
-
-    int gespenst_pacman_offset = random_range (8, DISPLAY_WIDTH - 16);
-
-
+    coord_t gespenst_pacman_offset = random_range (8, DISPLAY_WIDTH - 16);
 
     uint8_t module = DISPLAY_WIDTH / 4;
 
@@ -113,30 +51,19 @@ void pacman()
     }
 
     delay_ms (1500);
+
     uint8_t ende = 0;
     uint8_t pacman_status = 0; // 0 = maul auf; 1 = halb zu, schließend; 2 = zu, 3 = halb zu, öffnend; >3 = pacman wird gefressen;
 
     uint8_t gespenst_status = true; // gespenster"fuß"status
-    uint8_t gespenst_r;
-    uint8_t gespenst_g;
-    uint8_t gespenst_b;
 
-    if (gespenst == 0) {
-        gespenst_r = 255;
-        gespenst_g = 0;
-        gespenst_b = 0;
-    } else if (gespenst == 1) {
-        gespenst_r = 255;
-        gespenst_g = 0;
-        gespenst_b = 255;
-    } else if (gespenst == 2) {
-        gespenst_r = 0;
-        gespenst_g = 255;
-        gespenst_b = 255;
-    } else {
-        gespenst_r = 255;
-        gespenst_g = 128;
-        gespenst_b = 0;
+    color_t gespenst_color;
+    switch(gespenst)
+    {
+        case 0:		gespenst_color = display_color_from_rgb( 255,   0,   0 );	break;
+        case 1:		gespenst_color = display_color_from_rgb( 255,   0, 255 );	break;
+        case 2:		gespenst_color = display_color_from_rgb(   0, 255, 255 );	break;
+        default:	gespenst_color = display_color_from_rgb( 255, 128,   0 );	break;
     }
 
     uint8_t gespenst_pos;
@@ -246,10 +173,10 @@ void pacman()
                 display_pixel_set (pacman_pos - 1, 5, display_color_from_rgb ( 255, 255, 0 ) );
                 display_pixel_set (pacman_pos    , 5, display_color_from_rgb ( 255, 255, 0 ) );
 
-                display_pixel_set (pacman_pos - 4, 6, display_color_from_rgb (255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 3, 6, display_color_from_rgb (255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 2, 6, display_color_from_rgb (255, 255, 0 ) );
-                display_pixel_set (pacman_pos - 1, 6, display_color_from_rgb (255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 4, 6, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 3, 6, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 2, 6, display_color_from_rgb ( 255, 255, 0 ) );
+                display_pixel_set (pacman_pos - 1, 6, display_color_from_rgb ( 255, 255, 0 ) );
 
 
                 if ( (pacman_pos + 1) % 4 == 0) {
@@ -259,6 +186,8 @@ void pacman()
                 //gespenst malen
 
                 if (pacman_pos > gespenst_pacman_offset) {
+                    display_sprite_put_P(gespenst_pos - 8, 0, 9, 8, gespenst_color, gespenst_sprite);
+/*
                     for (int i = 0; i < 8; i++) {
                         for (int j = 0; j < 9; j++) {
                             if ( pgm_read_byte ( &gespenst_pixel[i][j] ) ) {
@@ -266,6 +195,7 @@ void pacman()
                             }
                         }
                     }
+*/
 
                     //augen malen
                     display_pixel_set (gespenst_pos - 2, 2, display_color_from_rgb ( 255, 255, 255 ) );
@@ -283,7 +213,7 @@ void pacman()
                             if (f % 2 == 0) {
                                 display_pixel_set (gespenst_pos - f, 7, display_color_from_rgb ( 0, 0, 0 ) );
                             } else {
-                                display_pixel_set (gespenst_pos - f, 7, display_color_from_rgb ( gespenst_r, gespenst_g, gespenst_b ) );
+                                display_pixel_set (gespenst_pos - f, 7, gespenst_color );
                             }
                         }
                     }
@@ -304,6 +234,8 @@ void pacman()
 
                 pacman_status++;
 
+                display_sprite_put_P(pacman_pos - 5, 0, 6, 6, display_color_from_rgb ( 255, 255, 0 ), &pacman_gefressen_sprite[pacman_status - 4]);
+/*
                 for (int n = 0; n < 6; n++) {
                     for (int m = 0; m < 6; m++) {
                         if ( (pacman_status < 9) && pgm_read_byte ( &pacman_gefressen_pixel[pacman_status - 4][m][n]) ) {
@@ -311,6 +243,7 @@ void pacman()
                         }
                     }
                 }
+*/
 
                 delay (50);
             }
