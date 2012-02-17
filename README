@@ -1,0 +1,19 @@
+Toppoint LED Matrix
+===================
+
+Zahlreiche verschiedene Animationen für eine RGB-PWM-LED-Matrix der größe 32 x 8 mit 256 Farben.
+
+Folgende Animationen sind verfügbar:
+
+    Defender Clone                              Frank BArtels
+    String-Animation                            Benny Baumann, Frank BArtels, et al.
+    Leuchtturm                                  Sven Jonetat
+    Pacman                                      Adrian
+    Forest Fire                                 Frank Bartels, Idee via Rosetta Code
+    Matrix Code                                 Adrian
+    Sich bewegendes Herz                        Frnk BArtels
+
+Eine großes Dankeschön geht an:
+
+    Alan Burlison                               Das dem Master Makefile zugrunde liegende Script
+    Die Autoren von AStyle                      Damit der Code einheitlich aussieht
