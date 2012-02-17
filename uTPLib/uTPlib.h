@@ -75,6 +75,9 @@ static inline color_t display_color_from_rgb(color_t r, color_t g, color_t b) {
     return (b & 0300) + ((g >> 2) & 0070) + ((r >> 5) & 007);
 }
 
+void display_sprite_put(coord_t x, coord_t y, coord_t w, coord_t h, color_t c, char *sprite);
+void display_sprite_put_P(coord_t x, coord_t y, coord_t w, coord_t h, color_t c, const prog_uint8_t *sprite);
+
 void font_char_print(coord_t x, coord_t y, color_t color, char c);
 void font_string_printX(coord_t x, coord_t y, color_t color, char *s);
 void font_string_printY(coord_t x, coord_t y, color_t color, char *s);
