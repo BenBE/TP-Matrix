@@ -18,6 +18,8 @@ void heart(void);
 void leuchtturm(void);
 void matrix_code(void);
 
+void game_of_life(void);
+
 #ifdef __cplusplus
 }
 #endif

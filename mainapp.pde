@@ -17,6 +17,7 @@ void loop()
     display_buffer_active_set(0);
     display_buffer_write_set(1);
 
+    game_of_life();
     string_anim (42);
     pacman();
     string_anim (0);
@@ -26,7 +27,7 @@ void loop()
     string_anim (2);
     defender();
     string_anim (3);
-    leuchtturm();
+//    leuchtturm();
     string_anim (4);
     matrix_code();
     string_anim (5);
