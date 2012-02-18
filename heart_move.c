@@ -2,66 +2,53 @@
 
 #include "main.h"
 
-void heart()
-{
-    int o = 0;
-    int o1 = 0;
+const prog_uint8_t heart[9] = {
+    0x0C, 0x12, 0x21, 0x42, 0x84, 0x42, 0x21, 0x12, 0x0C
+};
 
-    int counter = 66;
+void heart() {
+    display_buffer_write_set(0);
+    display_clear_black();
+    display_buffer_active_set(0);
+    display_buffer_write_set(1);
 
-    while (counter--) {
-        delay_ms (50);
-        display_buffer_swap (0);
-
-        // make nice background
-        o1++;
-
-        if (o1 >= DISPLAY_WIDTH) {
-            o1 = 0;
-        }
-
-        for (int x = 0; x < DISPLAY_WIDTH; x++) {
-            //int x1=(x+SCRdx-o1)%SCRdx;
-            int x1 = (x + o1) % DISPLAY_WIDTH;
-
-            for (int y = 0; y < DISPLAY_HEIGHT; y++) {
-                display_pixel_set (x1, y, display_color_from_rgb ( x * 255 / DISPLAY_WIDTH, y * 255 / DISPLAY_HEIGHT, 0 ) );
-                //scrr[act_buf_write][x1][y]=x*255/SCRdx;
-                //scrg[act_buf_write][x1][y]=y*255/SCRdy;
-                //scrb[act_buf_write][x1][y]=0;
-            }
-        }
-
-        // animate blue heart
-        if (DISPLAY_WIDTH >= 9) {
-            o--;
-
-            if (o < 0) {
-                o = DISPLAY_WIDTH - 9;
-            }
-
-            //o++; if (o+8>=SCRdx) o=0;
-            int rgb = display_color_from_rgb (0, 0, 255);
-            (*display_write) [2 + o][0] = rgb;
-            (*display_write) [6 + o][0] = rgb;
-            (*display_write) [1 + o][1] = rgb;
-            (*display_write) [3 + o][1] = rgb;
-            (*display_write) [5 + o][1] = rgb;
-            (*display_write) [7 + o][1] = rgb;
-            (*display_write) [0 + o][2] = rgb;
-            (*display_write) [4 + o][2] = rgb;
-            (*display_write) [8 + o][2] = rgb;
-            (*display_write) [0 + o][3] = rgb;
-            (*display_write) [8 + o][3] = rgb;
-            (*display_write) [1 + o][4] = rgb;
-            (*display_write) [7 + o][4] = rgb;
-            (*display_write) [2 + o][5] = rgb;
-            (*display_write) [6 + o][5] = rgb;
-            (*display_write) [3 + o][6] = rgb;
-            (*display_write) [5 + o][6] = rgb;
-            (*display_write) [4 + o][7] = rgb;
-            // Use of scr[act_buf_write][x][y] is discouraged...
+    for(coord_t x = 0; x < DISPLAY_WIDTH; x++) {
+        for(coord_t y = 0; y < DISPLAY_HEIGHT; y++) {
+            display_pixel_set(x, y,
+                display_color_from_rgb(
+                    128 + 127 * y / (DISPLAY_HEIGHT - 1),
+                    255 - 255 * (DISPLAY_HEIGHT - y - 1) / (DISPLAY_HEIGHT - 1),
+                    128 - 128 * (DISPLAY_WIDTH - x - 1) / (DISPLAY_WIDTH - 1)
+                    )
+                );
         }
     }
-}
 
+    time_sync();
+
+    for (uint16_t counter = 128; counter; --counter) {
+        display_buffer_write_set(0);
+        display_buffer_copy(1, 0);
+
+        coord_t p = counter % DISPLAY_WIDTH;
+        display_sprite_put(p, 0, 9, 8, display_color_from_rgb( 255, 0, 128 ), heart);
+
+        if( DISPLAY_WIDTH - p < 9 ) {
+            display_sprite_put(p - DISPLAY_WIDTH, 0, 9, 8, 
+                display_color_from_rgb( 255, 0, 128 ), heart);
+        }
+
+        if(counter & 1) {
+            for(coord_t y = 0; y < DISPLAY_HEIGHT; y++) {
+                color_t tmp = display[1][0][y];
+                for(coord_t x = 0; x < DISPLAY_WIDTH - 1; x++) {
+                    display[1][x][y] = display[1][x + 1][y];
+                }
+                display[1][DISPLAY_WIDTH - 1][y] = tmp;
+            }
+        }
+
+        delay_ms(50);
+    }
+
+}
