@@ -11,7 +11,6 @@ extern "C" {
 
 void forest_fire(void);
 void pacman(void);
-void defender(void);
 void string_anim(char id);
 void heart(void);
 
