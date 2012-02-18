@@ -74,7 +74,7 @@ void matrix_code ()
     byte kiel[5] = {6, 4, 7, 8, 0};
     byte *woerter[3] = {toppoint, frickl, kiel};
     short lauf = 0;
-//    randomSeed (micros() );
+    //    randomSeed (micros() );
     byte rgb[10][3] = {{0, 255, 0}, {0, 159, 0}, {0, 127, 0}, {0, 95, 0}, {0, 63, 0}, {0, 63, 0}, {0, 63, 0}, {0, 63, 0}, {0, 63, 0}, {0, 63, 0}};
     struct zeichenkette {
         signed short x;

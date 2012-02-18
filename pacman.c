@@ -58,12 +58,20 @@ void pacman()
     uint8_t gespenst_status = true; // gespenster"fuß"status
 
     color_t gespenst_color;
-    switch(gespenst)
-    {
-        case 0:		gespenst_color = display_color_from_rgb( 255,   0,   0 );	break;
-        case 1:		gespenst_color = display_color_from_rgb( 255,   0, 255 );	break;
-        case 2:		gespenst_color = display_color_from_rgb(   0, 255, 255 );	break;
-        default:	gespenst_color = display_color_from_rgb( 255, 128,   0 );	break;
+
+    switch (gespenst) {
+        case 0:
+            gespenst_color = display_color_from_rgb ( 255,   0,   0 );
+            break;
+        case 1:
+            gespenst_color = display_color_from_rgb ( 255,   0, 255 );
+            break;
+        case 2:
+            gespenst_color = display_color_from_rgb (   0, 255, 255 );
+            break;
+        default:
+            gespenst_color = display_color_from_rgb ( 255, 128,   0 );
+            break;
     }
 
     uint8_t gespenst_pos;
