@@ -26,7 +26,7 @@ void loop()
     forest_fire();
     string_anim (2);
     string_anim (3);
-//    leuchtturm();
+    leuchtturm();
     string_anim (4);
     matrix_code();
     string_anim (5);
