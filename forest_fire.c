@@ -38,7 +38,7 @@ void forest_fire()
                     burn = 4;
                 }
 
-                uint8_t wood = display[1][x][y] & 0070;
+                uint8_t wood = (display[1][x][y] & 0070) >> 3;
                 if(7 > wood && !burn) {
                     wood += random_range(1, 3);
                     if(7 < wood) {
