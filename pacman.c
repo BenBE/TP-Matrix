@@ -3,8 +3,9 @@
 
 #include "main.h"
 
-const prog_uint8_t gespenst_sprite[9] =
-    {0xFC, 0x7E, 0xFF, 0x7F, 0xFF, 0x7F, 0xFF, 0x7E, 0xFC};
+const prog_uint8_t gespenst_sprite[9] = {
+    0xFC, 0x7E, 0xFF, 0x7F, 0xFF, 0x7F, 0xFF, 0x7E, 0xFC
+};
 
 const prog_uint8_t pacman_gefressen_sprite [6][6] = {
     {0x1E, 0x3F, 0x1E, 0x1E, 0x3F, 0x1E},
@@ -194,16 +195,7 @@ void pacman()
                 //gespenst malen
 
                 if (pacman_pos > gespenst_pacman_offset) {
-                    display_sprite_put_P(gespenst_pos - 8, 0, 9, 8, gespenst_color, gespenst_sprite);
-/*
-                    for (int i = 0; i < 8; i++) {
-                        for (int j = 0; j < 9; j++) {
-                            if ( pgm_read_byte ( &gespenst_pixel[i][j] ) ) {
-                                display_pixel_set (gespenst_pos - j, i, display_color_from_rgb ( gespenst_r, gespenst_g, gespenst_b ) );
-                            }
-                        }
-                    }
-*/
+                    display_sprite_put_P (gespenst_pos - 8, 0, 9, 8, gespenst_color, gespenst_sprite);
 
                     //augen malen
                     display_pixel_set (gespenst_pos - 2, 2, display_color_from_rgb ( 255, 255, 255 ) );
@@ -242,16 +234,7 @@ void pacman()
 
                 pacman_status++;
 
-                display_sprite_put_P(pacman_pos - 5, 0, 6, 6, display_color_from_rgb ( 255, 255, 0 ), &pacman_gefressen_sprite[pacman_status - 4]);
-/*
-                for (int n = 0; n < 6; n++) {
-                    for (int m = 0; m < 6; m++) {
-                        if ( (pacman_status < 9) && pgm_read_byte ( &pacman_gefressen_pixel[pacman_status - 4][m][n]) ) {
-                            display_pixel_set (pacman_pos - 5 + n, m, display_color_from_rgb ( 255, 255, 0 ) );
-                        }
-                    }
-                }
-*/
+                display_sprite_put_P (pacman_pos - 5, 0, 6, 6, display_color_from_rgb ( 255, 255, 0 ), &pacman_gefressen_sprite[pacman_status - 4]);
 
                 delay (50);
             }
