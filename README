@@ -5,15 +5,16 @@ Zahlreiche verschiedene Animationen für eine RGB-PWM-LED-Matrix der größe 32 
 
 Folgende Animationen sind verfügbar:
 
-    Game of Life                                Benny Baumann
+    Game of Life                CC-BY-SA-NC     Benny Baumann
     String-Animation                            Benny Baumann, Frank Bartels, et al.
     Leuchtturm                                  Sven Jonetat
     Pacman                                      Adrian
-    Forest Fire                                 Frank Bartels, Idee via Rosetta Code
+    Forest Fire                 CC-BY-SA-NC     Benny Baumann, Idee via Rosetta Code
     Matrix Code                                 Adrian
-    Sich bewegendes Herz                        Frank Bartels
+    Sich bewegendes Herz        CC-BY-SA-NC     Benny Baumann
 
 Eine großes Dankeschön geht an:
 
     Alan Burlison                               Das dem Master Makefile zugrunde liegende Script
+    Rosetta Code                                Zahlreiche nette Programmiertasks
     Die Autoren von AStyle                      Damit der Code einheitlich aussieht
