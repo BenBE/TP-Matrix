@@ -18,16 +18,16 @@ void forest_fire()
                 const coord_t y1 = (y + 1) % DISPLAY_HEIGHT;
 
                 uint16_t burn = 
-                    (display[1][x0][y0] & 007) + 
-                    (display[1][x0][y] & 007) + 
-                    (display[1][x0][y1] & 007) + 
-                    (display[1][x][y0] & 007) + 
-                    (display[1][x][y] & 007) + 
-                    (display[1][x][y1] & 007) + 
-                    (display[1][x1][y0] & 007) + 
-                    (display[1][x1][y] & 007) + 
+                    (display[1][x0][y0] & 007) +
+                    (display[1][x0][y] & 007) +
+                    (display[1][x0][y1] & 007) +
+                    (display[1][x][y0] & 007) +
+                    (display[1][x][y] & 007) +
+                    (display[1][x][y1] & 007) +
+                    (display[1][x1][y0] & 007) +
+                    (display[1][x1][y] & 007) +
                     (display[1][x1][y1] & 007);
-                if(!burn) {
+                if(!(display[1][x][y] & 007)) {
                     if(!random_range(0, 100)) {
                         burn++;
                     }
@@ -40,7 +40,9 @@ void forest_fire()
 
                 uint8_t wood = (display[1][x][y] & 0070) >> 3;
                 if(7 > wood && !burn) {
-                    wood += random_range(1, 3);
+                    if(!random_range(0, 50)) {
+                        wood += random_range(1, 6);
+                    }
                     if(7 < wood) {
                         wood = 7;
                     }
