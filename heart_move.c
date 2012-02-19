@@ -2,7 +2,7 @@
 
 #include "main.h"
 
-const prog_uint8_t heart[9] = {
+const prog_uint8_t heart_data[9] = {
     0x0C, 0x12, 0x21, 0x42, 0x84, 0x42, 0x21, 0x12, 0x0C
 };
 
@@ -31,11 +31,11 @@ void heart() {
         display_buffer_copy(1, 0);
 
         coord_t p = counter % DISPLAY_WIDTH;
-        display_sprite_put(p, 0, 9, 8, display_color_from_rgb( 255, 0, 128 ), heart);
+        display_sprite_put_P(p, 0, 9, 8, display_color_from_rgb( 255, 0, 128 ), heart_data);
 
         if( DISPLAY_WIDTH - p < 9 ) {
-            display_sprite_put(p - DISPLAY_WIDTH, 0, 9, 8, 
-                display_color_from_rgb( 255, 0, 128 ), heart);
+            display_sprite_put_P(p - DISPLAY_WIDTH, 0, 9, 8, 
+                display_color_from_rgb( 255, 0, 128 ), heart_data);
         }
 
         if(counter & 1) {
