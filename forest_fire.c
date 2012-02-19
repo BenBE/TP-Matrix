@@ -1,67 +1,69 @@
 #include <uTPlib.h>
-#include <WProgram.h>
 
 #include "main.h"
 
 void forest_fire()
 {
-    uint8_t forest[DISPLAY_WIDTH][DISPLAY_HEIGHT]; // 0:empty 1:tree 2:fire
-    uint8_t cell;
+    display_buffer_active_set(0);
+    display_buffer_write_set(1);
+    display_clear_black();
+    display_buffer_swap(2);
 
-    for (int x = 0; x < DISPLAY_WIDTH; x++) {
-        for (int y = 0; y < DISPLAY_HEIGHT; y++) {
-            cell = random_range (0, 2);
-            forest[x][y] = cell;
-            display_pixel_set (x, y, display_color_from_rgb ( cell > 1 ? 255 : 0, cell > 0 ? 127 : 0, 0 ) );
-        }
+    for(uint16_t steps = 256; steps; --steps) {
+        for(coord_t x = 0; x < DISPLAY_WIDTH; x++) {
+            for(coord_t y = 0; y < DISPLAY_HEIGHT; y++) {
+                const coord_t x0 = (x - 1 + DISPLAY_WIDTH) % DISPLAY_WIDTH;
+                const coord_t y0 = (y - 1 + DISPLAY_HEIGHT) % DISPLAY_HEIGHT;
+                const coord_t x1 = (x + 1) % DISPLAY_WIDTH;
+                const coord_t y1 = (y + 1) % DISPLAY_HEIGHT;
 
-        //        display_buffer_swap(2);
-    }
-
-    int counter = 500;
-
-    while (counter--) {
-        delay_ms (20);
-        display_buffer_swap (1);
-
-        for (int x = 0; x < DISPLAY_WIDTH; x++) {
-            for (int y = 0; y < DISPLAY_HEIGHT; y++) {
-                cell = (forest[x][y] & 3);
-
-                if (cell == 0) {
-                    cell = (random_range (0, 10) == 1 ? 1 : 0); // grow tree p=10%
-                } else if (cell == 1) {
-                    int neighbours = 0;
-
-                    for (int xx = -1; xx <= 1; xx++)
-                        for (int yy = -1; yy <= 1; yy++)
-                            if (! (xx == 0 && yy == 0) &&
-                                x + xx >= 0 && x + xx < DISPLAY_WIDTH &&
-                                y + yy >= 0 && y + yy < DISPLAY_HEIGHT)
-                                if ( (forest[x + xx][y + yy] & 3) == 2) {
-                                    neighbours++;
-                                    goto stop_neighbours;
-                                }
-
-stop_neighbours:
-
-                    if (neighbours || random_range (0, 100) == 1) {
-                        cell = 2;  // burn f=1%
+                uint16_t burn = 
+                    (display[1][x0][y0] & 007) + 
+                    (display[1][x0][y] & 007) + 
+                    (display[1][x0][y1] & 007) + 
+                    (display[1][x][y0] & 007) + 
+                    (display[1][x][y] & 007) + 
+                    (display[1][x][y1] & 007) + 
+                    (display[1][x1][y0] & 007) + 
+                    (display[1][x1][y] & 007) + 
+                    (display[1][x1][y1] & 007);
+                if(!burn) {
+                    if(!random_range(0, 100)) {
+                        burn++;
                     }
                 } else {
-                    cell = 0;  // stop burning
+                    burn++;
+                }
+                if(burn > 4) {
+                    burn = 4;
                 }
 
-                forest[x][y] = (forest[x][y] & 3) | (cell << 2); // save new value
-                display_pixel_set (x, y, display_color_from_rgb ( cell > 1 ? 255 : 0, cell > 0 ? 127 : 0, 0 ) );
+                uint8_t wood = (display[1][x][y] & 0070;
+                if(7 > wood && !burn) {
+                    wood += random_range(1, 3);
+                    if(7 < wood) {
+                        wood = 7;
+                    }
+                } else if(burn + burn > wood) {
+                    burn = 0;
+                    wood = 0;
+                } else {
+                    wood -= 2 * burn;
+                    if(burn > wood) {
+                        burn = wood;
+                        if(burn) {
+                            burn--;
+                        }
+                    }
+                }
+
+                display_pixel_set(x, y, burn + (wood << 3));
             }
         }
 
-        for (int x = 0; x < DISPLAY_WIDTH; x++) {
-            for (int y = 0; y < DISPLAY_HEIGHT; y++) {
-                forest[x][y] = forest[x][y] >> 2; // new value to old value
-            }
-        }
+        display_buffer_copy(0, 1);
+        delay_ms(40);
     }
+
 }
 
