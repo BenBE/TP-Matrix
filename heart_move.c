@@ -26,7 +26,7 @@ void heart() {
 
     time_sync();
 
-    for (uint16_t counter = 128; counter; --counter) {
+    for (uint16_t counter = 256; counter; --counter) {
         display_buffer_write_set(0);
         display_buffer_copy(1, 0);
 
