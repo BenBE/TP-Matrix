@@ -26,42 +26,45 @@ static void do_game_of_life()
             coord_t dx1 = (x + 1) % DISPLAY_WIDTH;
             coord_t dy1 = (y + 1) % DISPLAY_HEIGHT;
 
-            uint8_t life = display[0][x][y];
+            uint8_t life_old = display[0][x][y], life = 255 == life_old;
 
-            if (display[0][dx0][dy0]) {
+            if (255 == display[0][dx0][dy0]) {
                 count++;
             }
 
-            if (display[0][dx0][y]) {
+            if (255 == display[0][dx0][y]) {
                 count++;
             }
 
-            if (display[0][dx0][dy1]) {
+            if (255 == display[0][dx0][dy1]) {
                 count++;
             }
 
-            if (display[0][x][dy0]) {
+            if (255 == display[0][x][dy0]) {
                 count++;
             }
 
-            if (display[0][x][dy1]) {
+            if (255 == display[0][x][dy1]) {
                 count++;
             }
 
-            if (display[0][dx1][dy0]) {
+            if (255 == display[0][dx1][dy0]) {
                 count++;
             }
 
-            if (display[0][dx1][y]) {
+            if (255 == display[0][dx1][y]) {
                 count++;
             }
 
-            if (display[0][dx1][dy1]) {
+            if (255 == display[0][dx1][dy1]) {
                 count++;
             }
 
             life = (3 == count) || (life && (2 == count) );
-            display_pixel_set (x, y, life ? 255 : 0);
+            life_old &= 7;
+            life_old = (life_old - 2) * (life_old > 1);
+            life_old = ((life_old >> 1) << 6) + life_old * 0011;
+            display_pixel_set (x, y, life ? 255 : life_old);
         }
     }
 }
