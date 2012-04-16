@@ -51,7 +51,7 @@ void nyancat() {
         delay_ms(100);
     }
 
-    for(coord_t j = pos; j < 255; j++) {
+    for(coord_t j = pos; j < pos+2*DISPLAY_WIDTH; j++) {
         display_clear_color(0100);
 
         for(coord_t i = 0; i < pos; i++) {
@@ -79,6 +79,37 @@ void nyancat() {
 
         delay_ms(100);
     }
+
+    for(coord_t j = 0; j < pos+8; j++, pos+=j&1) {
+        display_clear_color(0100);
+
+        for(coord_t i = j<6 ? 0 : j-6; i < pos; i++) {
+            coord_t y = ((i + pos) >> 1) & 1;
+            display_pixel_set(i, y+0, 0007);
+            display_pixel_set(i, y+1, 0037);
+            display_pixel_set(i, y+2, 0077);
+            display_pixel_set(i, y+3, 0070);
+            display_pixel_set(i, y+4, 0360);
+            display_pixel_set(i, y+5, 0300);
+            display_pixel_set(i, y+6, 0306);
+        }
+
+        display_sprite_put_P(pos-5, 0, sizeof nyan_body,  8, 0223, nyan_body);
+        display_sprite_put_P(pos+0, 0, sizeof nyan_grey,  8, 0133, nyan_grey);
+        display_sprite_put_P(pos+0, 0, sizeof nyan_black, 8, 0000, nyan_black);
+
+        coord_t y = !(j & 3);
+        display_pixel_set(pos-4+0+y, 7, 0111);
+        display_pixel_set(pos-4+1-y, 8, 0111);
+        display_pixel_set(pos+0+1-y, 7, 0111);
+        display_pixel_set(pos+0+0+y, 8, 0111);
+
+        display_buffer_swap(1);
+
+        delay_ms(100);
+    }
+
+
 
 
 }
