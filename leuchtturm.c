@@ -3,30 +3,50 @@
 //#include <WProgram.h>
 #include "main.h"
 
-// Animationsfunktion eines Leuchtturms v0.03, von Sven Jonetat, 2012
+// Animationsfunktion eines Leuchtturms v0.04, von Sven Jonetat, 2012
+// mit großem Dank für die Unterstützung an Frank Bartels u. Benny Baumann
+// im Rahmen des Toppoint e.V. Kiel, Projekt Schaufensterledmatrix/Arduino
 //
-// Lichtkegel soll sich in verschiedenen Farben und Längen aufbauen
-// und somit einen sich drehenden Lichtkegel auf beide Seiten simulieren.
-// Darstellung des Leuchtturms an wechselnden Stellen möglich.
+// Vorhaben: Lichtkegel soll sich in verschiedenen Farben und Längen aufbauen und somit einen sich
+// drehenden Lichtkegel auf beide Seiten simulieren. Die Farbänderung entsprechend der Position.
+// Darstellung des Leuchtturms an wechselnden Stellen mit animiertem Wasser, event. Vögeln oder Boot.
+// Antialaising der Stufen des Lichtkegels
 //
+// Details, Notizen: 
 //  Matrix und Farbe
 //    x aus 0..DISPLAY_WIDTH-1   DISPLAY_WIDTH derzeit 32, wird noch bis 48 ausgebaut, vorher SCRdx
 //    y aus 0..SCRdy-1   SCRdy ist 8 (Null oben, sieben unten)
 //    r,g,b (rot,gruen,blau) aus unsignbed char (0..255)
 // .... kein Gelb. weiss = alle an! rot+gruen = gelb, eventuell ein bisschen blau
+//
+// Versionshistory:
+// v0.04 Antialaising auf Länge gebracht
+// v0.03 Umstellung auf neue Variablen und Umstrukturierung
+// v0.02 Randomposition als Standort hinzugefügt, Strand und Meer ebenfalls
+// v0.01 unbekannt
+// v0.00 unbekannt
+//
+//.....................xxx...............
+//....................#####..............
+//....................#####..............
+//.....................xxx...............
+//.....................000...............
+//.....................xxx...............
+//____________________OOOOO,,,,,,,,,,,,,,
+
 
 static void draw_leuchtturm(coord_t pos);
 static void draw_light(coord_t lipos_start, coord_t lipos_end);
 
 static void draw_leuchtturm(coord_t pos) {
-    color_t r = 255;                                         // Farbzuweisung in der Schleife
+    color_t r = 255;                                         	// Farbzuweisung in der Schleife
 
-    int yt = 7;                                      // Koordinaten (Abkuerzung t (Turm) an x und y)
+    int yt = 7;                                      		// Koordinaten (Abkuerzung t (Turm) an x und y)
 
     // Beginn des Leuchtturmbaus
     // Zeichnet eine Linie fuer Fuss
-    for ( int xt = pos; xt < pos + 5; xt++) {          // Position in der Matrix (Frage ob an Pos 15 oder 16 erster Paint)-->15 erster paint
-        // mit zu zeichnender Laenge  5
+    for ( int xt = pos; xt < pos + 5; xt++) {          		// Position in der Matrix (Frage ob an Pos 15 oder 16 erster Paint)-->15 erster paint
+								// mit zu zeichnender Laenge  5
         display_pixel_set (xt, yt, display_color_from_rgb ( r, 0, 0 ) );                   // Farbe rot
     }
 
@@ -89,7 +109,12 @@ static void draw_light(coord_t lipos_start, coord_t lipos_end) {
         if (d < 4) {                       // erster Teil des Lichtstrahles schmal
             display_pixel_set (x, yl - 5, display_color_from_rgb ( r, g, b ) );           // yl-5 Farbe
             display_pixel_set (x, yl - 6, display_color_from_rgb ( r, g, b ) );           // yl-6 Farbe
-        } else if (d < 5) {         // Antialaising Schritt
+        } else if (d < 7) {         // Antialaising Schritte
+            display_pixel_set (x, yl - 4, display_color_from_rgb ( r - 195, g - 195, b - 195 ) );     // yl-4 Farbe
+            display_pixel_set (x, yl - 5, display_color_from_rgb ( r, g, b ) );                // yl-5 Farbe
+            display_pixel_set (x, yl - 6, display_color_from_rgb ( r, g, b ) );                // yl-6 Farbe
+            display_pixel_set (x, yl - 7, display_color_from_rgb ( r - 195, g - 195, b - 195) );      // yl-7 Farbe
+	} else if (d < 11) {         // Antialaising Schritte
             display_pixel_set (x, yl - 4, display_color_from_rgb ( r - 95, g - 95, b - 95 ) );     // yl-4 Farbe
             display_pixel_set (x, yl - 5, display_color_from_rgb ( r, g, b ) );                // yl-5 Farbe
             display_pixel_set (x, yl - 6, display_color_from_rgb ( r, g, b ) );                // yl-6 Farbe
@@ -108,7 +133,7 @@ void leuchtturm()                                // Animationsfunktion Leuchttur
 {
     // Standard stuff
 
-    int counter = 5;                                // runs 80 steps
+    int counter = 5;                                // runs "counter" steps
 
     const int pos = random_range (0, DISPLAY_WIDTH-6);   // Zufallsposition (mit Abzug, so dass Leuchtturm auch im Bild ist)
     const int double_rot = random_range(0, 2);
