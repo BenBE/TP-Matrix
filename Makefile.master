@@ -135,8 +135,9 @@ RM = rm -rf
 MV = mv -f
 
 # Compiler flags.
-INC_FLAGS = \
+INC_FLAGS ?= \
     $(addprefix -I,$(INC_DIRS)) $(addprefix -I,$(LIB_DIRS)) -I$(ARD_SRC_DIR)
+INC_FLAGS += -I$(ARD_HOME)/hardware/arduino/variants/standard -I$(ARD_HOME)/hardware/arduino/variants/mega
 ARD_FLAGS = -mmcu=$(MCU) -DF_CPU=$(F_CPU) -DARDUINO=$(ARD_REV)
 C_CXX_FLAGS = \
     -Wall -Wextra -Wundef -Wno-unused-parameter \
@@ -237,7 +238,7 @@ $(BUILD_DIR) :
 	$(MKDIR) $@
 
 $(SKT_PDE_OBJ) : $(SKT_PDE_SRC)
-	echo '#include <WProgram.h>' > $(BUILD_DIR)/$(SKETCH)_pde.cpp
+	echo '#include <Arduino.h>' > $(BUILD_DIR)/$(SKETCH)_pde.cpp
 	cat $(SKT_PDE_SRC) >> $(BUILD_DIR)/$(SKETCH)_pde.cpp
 	cd $(BUILD_DIR) && $(CXX) -c $(subst build/,,$(CXX_FLAGS)) \
 	    $(OPT_FLAGS) $(ARD_FLAGS) -I.. \
