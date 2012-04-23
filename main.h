@@ -1,7 +1,7 @@
 #ifndef H_MAIN
 #define H_MAIN
 
-#include <WProgram.h>
+#include <Arduino.h>
 
 #include <uTPlib.h>
 

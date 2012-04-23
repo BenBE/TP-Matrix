@@ -1,6 +1,6 @@
 #include "uTPlib.h"
 
-#include <WProgram.h>
+#include <Arduino.h>
 
 #define pin_pwm_timer	3
 #define int_pwm_timer	1

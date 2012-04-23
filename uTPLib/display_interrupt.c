@@ -1,6 +1,6 @@
 #include "uTPlib.h"
 
-#include <WProgram.h>
+#include <Arduino.h>
 
 uint8_t display_lut_data[4][8] = {
     {	0x00,	0x82,	0x88,	0x24,	0xA4,	0xAA,	0xEE,	0xFF	},
