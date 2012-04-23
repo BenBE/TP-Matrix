@@ -19,6 +19,8 @@ void matrix_code(void);
 
 void game_of_life(void);
 
+void nyancat(void);
+
 #ifdef __cplusplus
 }
 #endif
