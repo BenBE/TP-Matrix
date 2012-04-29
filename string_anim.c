@@ -18,7 +18,7 @@ void string_doanim (char *s, timebase_t wait_after, color_t color)
         x--;
 
         if (x < -FONT_WIDTH) {
-            x += FONT_WIDTH;
+            x += FONT_WIDTH + 1;
             s++;
         }
     }
