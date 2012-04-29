@@ -86,7 +86,7 @@ void game_of_life()
         }
 
         display_buffer_copy (1, 0);
-        delay_ms (200);
+        delay_ms (50);
     }
 
 }
