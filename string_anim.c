@@ -42,8 +42,12 @@ void string_anim (char id)
             break;
         case 3:
             string_doanim ("Diese Laufschrift ist in Ihrem Land nicht verf\206gbar. Das tut uns (nicht) leid!", 250, display_color_from_rgb (255, 255, 255) );
+            break;
+        case 4:
             string_doanim ("Stoppt Zensursula, SOPA, PIPA, ACTA, ...!", 500, display_color_from_rgb (255, 0, 0) );
-            string_doanim ("F\206r m\206ndigen Umgang mit Internet und Netzneutralit\204t!", 500, display_color_from_rgb (0, 255, 0) );
+            break;
+        case 5:
+            string_doanim ("F\206r Netzneutralit\204t und m\206ndigen Umgang mit dem Internet!", 500, display_color_from_rgb (0, 255, 0) );
             break;
         case 42:
             string_doanim ("THE ANSWER TO LIFE, THE UNIVERSE AND EVERYTHING?        42!", 400, display_color_from_rgb (255, 255, 255) );
