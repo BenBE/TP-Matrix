@@ -21,6 +21,8 @@ void game_of_life(void);
 
 void nyancat(void);
 
+void progress(void);
+
 #ifdef __cplusplus
 }
 #endif
