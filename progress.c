@@ -12,7 +12,7 @@ void progress(void)
     display_buffer_write_set(0);
     display_buffer_active_set(0);
 
-    for(int i = 0; i <= 100; i++) {
+    for(int i = 0, s = 0; i <= 100; i+= !(s++&3)||(2!=progress_style) ) {
 
         switch(progress_style) {
             case 0:
@@ -60,6 +60,7 @@ void progress(void)
                 display_clear_color( 0255 );
 
                 timebase_t t = time_frame_get() - t0;
+                t >>= 5;
                 t %= DISPLAY_WIDTH;
 
                 for(coord_t x = 1; (x < DISPLAY_WIDTH - 1) && (x - 1 < (DISPLAY_WIDTH - 2) * i / 100); x++ ) {
@@ -90,7 +91,7 @@ void progress(void)
             }
         }
 
-        delay_ms(random_range(20, 250));
+        delay_ms(random_range(20, 25+i));
     }
 
     delay_ms(200);
