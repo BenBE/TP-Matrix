@@ -2,7 +2,7 @@
 
 #include "main.h"
 
-#define BLOCK_WIDTH 6
+#define BLOCK_WIDTH 5
 
 void progress(void) 
 {
@@ -44,7 +44,7 @@ void progress(void)
 
                 for(coord_t x = 2; (x < DISPLAY_WIDTH - 2) && (x - 2 - BLOCK_WIDTH + 1 < (DISPLAY_WIDTH - 4) * i / 100); x += BLOCK_WIDTH) {
                     for(coord_t y = 1; y < DISPLAY_HEIGHT - 1; y++) {
-                        color_t color = ((1 == y) || (DISPLAY_HEIGHT - 1 == y)) ? 0173 : 0070;
+                        color_t color = ((1 == y) || (DISPLAY_HEIGHT - 2 == y)) ? 0173 : 0060;
                         for(coord_t x1 = 0; x1 < BLOCK_WIDTH - 1; x1++) {
                             if(x + x1 >= DISPLAY_WIDTH - 2) {
                                 break;
@@ -68,7 +68,7 @@ void progress(void)
                         if(x == t) {
                             display_pixel_set(x, y, (y < 3) ? 0377 : 0174);
                         } else {
-                            display_pixel_set(x, y, (y < 3) ? 0275 : 0070);
+                            display_pixel_set(x, y, (y < 3) ? 0275 : 0060);
                         }
                     }
                 }
@@ -76,7 +76,6 @@ void progress(void)
                 break;
 
             default:
-            {
                 display_clear_color( 0000 );
 
                 coord_t w = ( DISPLAY_WIDTH + 1 ) / FONT_WIDTH - 2;
@@ -88,7 +87,6 @@ void progress(void)
                 if(i < 100) {
                     font_char_print(FONT_WIDTH * (2 + i * w / 100), 1, 0377, '>');
                 }
-            }
         }
 
         delay_ms(random_range(20, 25+i));
