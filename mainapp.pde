@@ -17,6 +17,7 @@ void loop()
     display_buffer_active_set(0);
     display_buffer_write_set(1);
 
+    progress();
     game_of_life();
     string_anim (42);
     pacman();
