@@ -23,6 +23,8 @@ void nyancat(void);
 
 void progress(void);
 
+void bonfire(void);
+
 #ifdef __cplusplus
 }
 #endif
