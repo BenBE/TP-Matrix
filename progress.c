@@ -9,6 +9,9 @@ void progress(void)
     int progress_style = random_range(0, 4);
     timebase_t t0 = time_frame_get();
 
+    display_buffer_write_set(0);
+    display_buffer_active_set(0);
+
     for(int i = 0; i <= 100; i++) {
 
         switch(progress_style) {
