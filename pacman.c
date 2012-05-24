@@ -33,13 +33,18 @@ const prog_uint8_t pacman_gefressen_sprite [6][6] = {
 
 void pacman()
 {
-    display_buffer_swap (1); //bildschirm leeren
+    display_buffer_active_set(0);
+    display_buffer_write_set(0);
+    display_clear_black();
+    display_buffer_write_set (1); //bildschirm leeren
+    display_clear_black();
     //    randomSeed (micros() );
 
     uint8_t richtung = 1;
     uint8_t gespenst = random_range (0, 4);
 
     uint8_t gespenst_frisst_pacman = 1 < random_range (1, 4);
+    gespenst_frisst_pacman = 0;
 
     coord_t gespenst_pacman_offset = random_range (8, DISPLAY_WIDTH - 16);
 
@@ -278,13 +283,14 @@ void pacman()
                 ende = 1;
             }
 
-            if (lauf == 100) {
+            if (lauf >= 200) {
                 ende = 1;
             }
 
             delay (100);
         } else {
-
+            //To ensure to finish the animation
+            ende = 1;
         }
     }
 }
