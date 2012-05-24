@@ -1,0 +1,9 @@
+VERBOSE ?= 0
+
+ifeq ("$(VERBOSE)","0")
+QS := @
+QE := @echo
+else
+QS := 
+QE := @true
+endif

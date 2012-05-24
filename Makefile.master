@@ -68,6 +68,8 @@ MON_SPEED ?= 9600
 
 ### Nothing below here should require editing. ###
 
+include Makefile.silencer
+
 # Check for the required definitions.
 ifndef BOARD
     $(error $$(BOARD) not defined)
@@ -91,18 +93,22 @@ endif
 PLATFORM = $(shell uname -s)
 ifeq "$(PLATFORM)" "SunOS"
     define run-monitor
-	gnome-terminal -t '$(BOARD) $(PORT)' \
+	${QE} "[RUN  ] Running monitor ..."
+	${QS}gnome-terminal -t '$(BOARD) $(PORT)' \
 	    -e 'env -i tip -$(MON_SPEED) $(PORT)' &
     endef
     define kill-monitor
-	- pkill -f 'tip.*$(PORT)'
+	${QE} "[KILL ] Killing monitor ..."
+	- ${QS}pkill -f 'tip.*$(PORT)'
     endef
 else ifeq "$(PLATFORM)" "Linux"
     define run-monitor
-	screen $(PORT) $(MON_SPEED)
+	${QE} "[RUN  ] Running monitor ..."
+	${QS}screen $(PORT) $(MON_SPEED)
     endef
     define kill-monitor
-	- pkill -f 'screen.*$(PORT)'
+	${QE} "[KILL ] Killing monitor ..."
+	- ${QS}pkill -f 'screen.*$(PORT)'
     endef
 else ifeq "$(PLATFORM)" "Darwin"
     $(error No monitor command for platform $(PLATFORM))
@@ -130,6 +136,7 @@ OBJDUMP = $(ARD_BIN)/avr-objdump
 AR = $(ARD_BIN)/avr-ar
 SIZE = $(ARD_BIN)/avr-size
 NM = $(ARD_BIN)/avr-nm
+LD = $(ARD_BIN)/avr-gcc
 MKDIR = mkdir -p
 RM = rm -rf
 MV = mv -f
@@ -209,21 +216,25 @@ endif
 
 # Common rule bodies.
 define run-cc
-	$(CC) -c $(C_FLAGS) $(OPT_FLAGS) $(ARD_FLAGS) $(INC_FLAGS) \
+	${QE} "[CC   ] Compiling $< ..."|sed -e "s/$(shell echo `pwd`|sed -e 's/\//\\\//g')/./g"
+	${QS}$(CC) -c $(C_FLAGS) $(OPT_FLAGS) $(ARD_FLAGS) $(INC_FLAGS) \
 	    -MD -MT '$@($%)' -MF $(@D)/.$(@F)_$*.dep $< -o $(BUILD_DIR)/$%
-	@ $(AR) rc $@ $(BUILD_DIR)/$%
-	@ $(RM) $(BUILD_DIR)/$%
-	@ $(CXXFILT) < $(BUILD_DIR)/$*.lst > $(BUILD_DIR)/$*.lst.tmp
-	@ $(MV) $(BUILD_DIR)/$*.lst.tmp $(BUILD_DIR)/$*.lst
+	${QE} "[AR   ] Archiving $@($<) ..."|sed -e "s/$(shell echo `pwd`|sed -e 's/\//\\\//g')/./g"
+	${QS}$(AR) rc $@ $(BUILD_DIR)/$%
+	${QS}$(RM) $(BUILD_DIR)/$%
+	${QS}$(CXXFILT) < $(BUILD_DIR)/$*.lst > $(BUILD_DIR)/$*.lst.tmp
+	${QS}$(MV) $(BUILD_DIR)/$*.lst.tmp $(BUILD_DIR)/$*.lst
 endef
 
 define run-cxx
-	$(CXX) -c $(CXX_FLAGS) $(OPT_FLAGS) $(ARD_FLAGS) $(INC_FLAGS) \
+	${QE} "[CXX  ] Compiling $< ..."|sed -e "s/$(shell echo `pwd`|sed -e 's/\//\\\//g')/./g"
+	${QS}$(CXX) -c $(CXX_FLAGS) $(OPT_FLAGS) $(ARD_FLAGS) $(INC_FLAGS) \
 	    -MD -MT '$@($%)' -MF $(@D)/.$(@F)_$*.dep $< -o $(BUILD_DIR)/$%
-	@ $(AR) rc $@ $(BUILD_DIR)/$%
-	@ $(RM) $(BUILD_DIR)/$%
-	@ $(CXXFILT) < $(BUILD_DIR)/$*.lst > $(BUILD_DIR)/$*.lst.tmp
-	@ $(MV) $(BUILD_DIR)/$*.lst.tmp $(BUILD_DIR)/$*.lst
+	${QE} "[AR   ] Archiving $@($<) ..."|sed -e "s/$(shell echo `pwd`|sed -e 's/\//\\\//g')/./g"
+	${QS}$(AR) rc $@ $(BUILD_DIR)/$%
+	${QS}$(RM) $(BUILD_DIR)/$%
+	${QS}$(CXXFILT) < $(BUILD_DIR)/$*.lst > $(BUILD_DIR)/$*.lst.tmp
+	${QS}$(MV) $(BUILD_DIR)/$*.lst.tmp $(BUILD_DIR)/$*.lst
 endef
 
 # Rules.
@@ -232,15 +243,18 @@ endef
 all : $(BUILD_DIR) $(IMAGE).hex
 
 clean :
-	$(RM) $(BUILD_DIR)
+	${QE} "[CLEAN] Cleaning $(BUILD_DIR) ..."|sed -e "s/$(shell echo `pwd`|sed -e 's/\//\\\//g')/./g"
+	${QS}$(RM) $(BUILD_DIR)
 
 $(BUILD_DIR) :
-	$(MKDIR) $@
+	${QE} "[MKDIR] Creating $@ ..."|sed -e "s/$(shell echo `pwd`|sed -e 's/\//\\\//g')/./g"
+	${QS}$(MKDIR) $@
 
 $(SKT_PDE_OBJ) : $(SKT_PDE_SRC)
-	echo '#include <Arduino.h>' > $(BUILD_DIR)/$(SKETCH)_pde.cpp
-	cat $(SKT_PDE_SRC) >> $(BUILD_DIR)/$(SKETCH)_pde.cpp
-	cd $(BUILD_DIR) && $(CXX) -c $(subst build/,,$(CXX_FLAGS)) \
+	${QE} "[CXX  ] Compiling $< ..."|sed -e "s/$(shell echo `pwd`|sed -e 's/\//\\\//g')/./g"
+	${QS}echo '#include <Arduino.h>' > $(BUILD_DIR)/$(SKETCH)_pde.cpp
+	${QS}cat $(SKT_PDE_SRC) >> $(BUILD_DIR)/$(SKETCH)_pde.cpp
+	${QS}cd $(BUILD_DIR) && $(CXX) -c $(subst build/,,$(CXX_FLAGS)) \
 	    $(OPT_FLAGS) $(ARD_FLAGS) -I.. \
 	    $(patsubst -I..%,-I../..%,$(INC_FLAGS)) \
 	    $(SKETCH)_pde.cpp -o $(@F)
@@ -265,19 +279,21 @@ $(BUILD_DIR)/%.d : %.cpp
 
 # The multiple "-lm" flags are to work around a linker bug.
 $(IMAGE).hex : $(ARD_AR_OBJ) $(LIB_AR_OBJ) $(SKT_AR_OBJ) $(SKT_PDE_OBJ)
-	$(CC) -lm $(CXX_FLAGS) $(OPT_FLAGS) $(ARD_FLAGS) -L$(BUILD_DIR) \
+	${QE} "[LD   ] Linking $@ ..."|sed -e "s/$(shell echo `pwd`|sed -e 's/\//\\\//g')/./g"
+	${QS}$(LD) -lm $(CXX_FLAGS) $(OPT_FLAGS) $(ARD_FLAGS) -L$(BUILD_DIR) \
 	    $(SKT_PDE_OBJ) $(SKT_LD_FLAG) $(LIB_LD_FLAG) $(ARD_LD_FLAG) \
 	    -lm -o $(IMAGE).elf
-	$(OBJCOPY) -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load \
+	${QS}$(OBJCOPY) -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load \
 	    --no-change-warnings --change-section-lma .eeprom=0 $(IMAGE).elf \
 	    $(IMAGE).eep
-	$(OBJCOPY) -O ihex -R .eeprom $(IMAGE).elf $(IMAGE).hex
-	$(OBJDUMP) -h -S $(IMAGE).elf | $(CXXFILT) -t > $(IMAGE).lst
-	$(SIZE) $(IMAGE).elf
+	${QS}$(OBJCOPY) -O ihex -R .eeprom $(IMAGE).elf $(IMAGE).hex
+	${QS}$(OBJDUMP) -h -S $(IMAGE).elf | $(CXXFILT) -t > $(IMAGE).lst
+	${QS}$(SIZE) $(IMAGE).elf
 
 upload : all
 	$(kill-monitor)
-	- $(AVRDUDE) -V -C$(AVRDUDE_CONF) -p$(MCU) -c$(PROGRAMMER) -P$(PORT) \
+	${QE} "[AVR  ] Uploading ..."
+	- ${QS}$(AVRDUDE) -V -C$(AVRDUDE_CONF) -p$(MCU) -c$(PROGRAMMER) -P$(PORT) \
 	    -b$(UPLOAD_SPEED) -D -Uflash:w:$(IMAGE).hex:i
 
 monitor :

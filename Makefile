@@ -1,3 +1,4 @@
+VERBOSE ?= 0
 BOARD ?= atmega328
 PORT ?= /dev/ttyUSB3
 #LIB_DIRS += .
