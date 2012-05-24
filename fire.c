@@ -51,7 +51,7 @@ void bonfire() {
         for(coord_t x = 0; x < DISPLAY_WIDTH; x++) {
             for(coord_t y = 0; y < DISPLAY_HEIGHT; y++) {
                 coord_t ctmp = y + fire[x] - DISPLAY_HEIGHT;
-                color_t c = (ctmp < 0) ? 0 : (ctmp >= sizeof(fire_lookup) / sizeof(*fire_lookup)) ? sizeof(fire_lookup) / sizeof(*fire_lookup) - 1 : ctmp;
+                color_t c = (ctmp < 0) ? 0 : ((uint8_t)ctmp >= (uint8_t)(sizeof(fire_lookup) / sizeof(*fire_lookup))) ? sizeof(fire_lookup) / sizeof(*fire_lookup) - 1 : (color_t)ctmp;
                 c = pgm_read_byte(&fire_lookup[c]);
                 display_pixel_set(x, y, c);
             }

@@ -65,7 +65,7 @@ void progress(void)
 
                 for(coord_t x = 1; (x < DISPLAY_WIDTH - 1) && (x - 1 < (DISPLAY_WIDTH - 2) * i / 100); x++ ) {
                     for(coord_t y = 1; y < DISPLAY_HEIGHT - 1; y++) {
-                        if(x == t) {
+                        if(x == (coord_t)t) {
                             display_pixel_set(x, y, (y < 3) ? 0377 : 0174);
                         } else {
                             display_pixel_set(x, y, (y < 3) ? 0275 : 0060);

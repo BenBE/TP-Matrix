@@ -249,7 +249,7 @@ void pacman()
 
                 pacman_status++;
 
-                display_sprite_put_P (pacman_pos - 5, 0, 6, 6, display_color_from_rgb ( 255, 255, 0 ), &pacman_gefressen_sprite[pacman_status - 4]);
+                display_sprite_put_P (pacman_pos - 5, 0, 6, 6, display_color_from_rgb ( 255, 255, 0 ), pacman_gefressen_sprite[pacman_status - 4]);
 
                 delay (50);
             }
