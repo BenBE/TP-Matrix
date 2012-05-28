@@ -34,7 +34,6 @@ void dcf77_decrypt(dcf77_cipherblock_t *data)
      *  Output Block
      */
 
-
     for( volatile unsigned int i = 16; i > 0; i--) {
         dcf77_cipher_shift_right(i, data);
 
@@ -48,6 +47,5 @@ void dcf77_decrypt(dcf77_cipherblock_t *data)
         data->data.message.cipher_reg.regL = data->data.message.cipher_reg.regR;
         data->data.message.cipher_reg.regR = regLDash;
     }
-
 
 }
