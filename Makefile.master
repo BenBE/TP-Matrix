@@ -163,7 +163,7 @@ CXX_FLAGS = \
 # http://gcc.gnu.org/onlinedocs/gcc-4.3.5/gcc/
 # http://www.tty1.net/blog/2008-04-29-avr-gcc-optimisations_en.html
 OPT_FLAGS = \
-    -O3 -finline -fgcse -fcrossjumping \
+    -Os -finline -fgcse -fcrossjumping \
     -funsigned-char -funsigned-bitfields -fpack-struct -fshort-enums \
     -ffunction-sections -fdata-sections -Wl,--gc-sections,--relax \
     -fno-inline-small-functions -fno-tree-scev-cprop -fno-exceptions \
