@@ -11,7 +11,7 @@ extern "C" {
 
 #define	DISPLAY_WIDTH	32
 #define	DISPLAY_HEIGHT	8
-#define DISPLAY_BUFFERS	2
+#define DISPLAY_BUFFERS	3
 
 #define FONT_WIDTH	5
 #define FONT_HEIGHT	6

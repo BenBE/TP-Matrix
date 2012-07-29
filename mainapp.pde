@@ -18,6 +18,8 @@ void loop()
     display_buffer_write_set(1);
 
     progress();
+    PlayPong();
+    string_anim (6);
     game_of_life();
     string_anim (42);
     pacman();

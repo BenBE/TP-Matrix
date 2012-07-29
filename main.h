@@ -25,6 +25,8 @@ void progress(void);
 
 void bonfire(void);
 
+void PlayPong(void);
+
 #ifdef __cplusplus
 }
 #endif
