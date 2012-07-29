@@ -1,0 +1,12 @@
+* text=auto
+
+*.c text
+*.cpp text
+*.pde text
+*.h text
+
+Makefile text
+Makefile.* text
+
+.gitignore text
+.gitattributes text
