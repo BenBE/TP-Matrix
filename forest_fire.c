@@ -4,10 +4,12 @@
 
 void forest_fire()
 {
+    display_buffer_write_set(0);
+    display_clear_black();
     display_buffer_active_set(0);
     display_buffer_write_set(1);
     display_clear_black();
-    display_buffer_swap(2);
+    display_buffer_swap(0);
 
     for(uint16_t steps = 256; steps; --steps) {
         for(coord_t x = 0; x < DISPLAY_WIDTH; x++) {
