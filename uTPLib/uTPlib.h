@@ -113,6 +113,36 @@ static inline uint8_t rot_right(uint8_t v, uint8_t bits)
 
 int random_range(int min, int max);
 
+typedef enum rs232_bits {
+    rs232_bits_5,
+    rs232_bits_6,
+    rs232_bits_7,
+    rs232_bits_8,
+    rs232_bits_9
+} rs232_bits_t;
+
+typedef enum rs232_parity {
+    rs232_parity_none,
+    rs232_parity_odd,
+    rs232_parity_even
+} rs232_parity_t;
+
+typedef enum rs232_stop {
+    rs232_stop_1bit,
+    rs232_stop_15bit,
+    rs232_stop_2bit
+} rs232_stop_t;
+
+typedef enum rs232_txmode {
+    rs232_txmode_sdr,
+    rs232_txmode_ddr,
+    rs232_txmode_async
+} rs232_txmode_t;
+
+void rs232_init(void);
+void rs232_data_mode(rs232_bits_t bits, rs232_parity_t parity, rs232_stop_t stopbits);
+void rs232_data_rate(uint32_t baud, rs232_txmode_t mode);
+
 #ifdef __cplusplus
 }
 #endif
