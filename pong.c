@@ -100,7 +100,7 @@ void PlayPong(void) {
                 }
             }
 
-            delay_ms(75);
+            delay_ms(25);
         }
 
         if(ball_x < 0) {
@@ -109,7 +109,7 @@ void PlayPong(void) {
             pts_player1++;
         }
 
-        delay_ms(250);
+        delay_ms(500);
     }
 
 }
