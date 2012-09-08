@@ -9,7 +9,7 @@
 extern "C" {
 #endif
 
-#define	DISPLAY_WIDTH	32
+#define	DISPLAY_WIDTH	48
 #define	DISPLAY_HEIGHT	8
 #define DISPLAY_BUFFERS	3
 
