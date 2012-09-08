@@ -27,6 +27,9 @@ void bonfire(void);
 
 void PlayPong(void);
 
+void drop(void);
+void drop2(void);
+
 #ifdef __cplusplus
 }
 #endif

@@ -31,6 +31,7 @@ void loop()
     nyancat();
     string_anim (3);
     leuchtturm();
+    drop2();
     string_anim (4);
     matrix_code();
     string_anim (5);
