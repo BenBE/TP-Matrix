@@ -1,7 +1,5 @@
 #include "uTPlib.h"
 
-#include <Arduino.h>
-
 #define pin_pwm_timer	3
 #define int_pwm_timer	1
 #define frq_pwm_select	-1

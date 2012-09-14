@@ -3,7 +3,10 @@
 
 #include <stdint.h>
 
-#include <avr/pgmspace.h>
+#ifndef X86
+  #include <avr/pgmspace.h>
+  #include <Arduino.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {
