@@ -4,7 +4,7 @@
 //	DATA	0x08
 //	LE	0x04
 //	OE	0x02
-
+#ifndef X86
 void display_mode(char mode) // 0:normal 1:special
 {
     PORTB &=~ 0x2d;
@@ -88,4 +88,9 @@ void display_mode(char mode) // 0:normal 1:special
 //  digitalWrite(pinSCK, LOW);
 //  delay(1);
 }
+#else
 
+void display_mode(char mode) {
+  // TODO Implement display mode switch
+}
+#endif
