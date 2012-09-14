@@ -2,10 +2,14 @@
 #define H_UTPLIB
 
 #include <stdint.h>
+#define X86
 
 #ifndef X86
   #include <avr/pgmspace.h>
   #include <Arduino.h>
+#else 
+  #include <unistd.h>
+  #include "../x86.h"
 #endif
 
 #ifdef __cplusplus
@@ -19,7 +23,11 @@ extern "C" {
 #define FONT_WIDTH	5
 #define FONT_HEIGHT	6
 
+#ifdef X86 
+typedef int coord_t;
+#else
 typedef int8_t coord_t;
+#endif 
 typedef uint8_t color_t;
 typedef uint8_t buffer_t;
 
