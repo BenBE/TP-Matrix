@@ -9,6 +9,7 @@
   #include <Arduino.h>
 #else 
   #include <unistd.h>
+  #include <pthread.h>
   #include "../x86.h"
 #endif
 
@@ -49,10 +50,16 @@ extern screen_t display[DISPLAY_BUFFERS];
 extern screen_t* display_active;
 extern screen_t* display_write;
 
-extern const prog_uint8_t font[128][FONT_WIDTH];
+extern const uint8_t font[128][FONT_WIDTH];
 
 extern volatile timebase_t time_frame;
 extern volatile uint8_t time_vsynced;
+
+#ifdef X86
+pthread_cond_t  c_time_sync;
+pthread_mutex_t m_time_sync;
+pthread_t display_thread;
+#endif
 
 void display_init(void);
 void display_mode(char mode);
