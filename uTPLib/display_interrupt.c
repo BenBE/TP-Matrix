@@ -1,5 +1,6 @@
 #include "uTPlib.h"
 
+#ifndef X86
 uint8_t display_lut_data[4][8] = {
     {	0x00,	0x82,	0x88,	0x24,	0xA4,	0xAA,	0xEE,	0xFF	},
     {	0x00,	0x04,	0x88,	0x91,	0xA4,	0xAA,	0xEE,	0xFF	},
@@ -69,3 +70,42 @@ void display_interrupt()
     time_frame++;
 }
 
+#else
+
+#include <GL/glut.h>
+#include <GL/gl.h>
+#include <GL/glu.h>  
+
+void timer(int value) {
+  glutPostRedisplay();
+}
+
+void display_interrupt() {
+  /* clear window */
+  glClear(GL_COLOR_BUFFER_BIT);
+
+  /* draw pixels */
+  color_t *scr_y = &(*display_active)[0][DISPLAY_HEIGHT-1];
+  for(char x = 0; x < DISPLAY_WIDTH; x++, scr_y += 2 * DISPLAY_HEIGHT)
+  {
+    for(char y = 0; y < DISPLAY_HEIGHT; y++)
+    {
+    unsigned char pixel = *scr_y--;
+    unsigned char r,g,b;
+    r = pixel & 0x07;
+    g = (pixel >>= 3) & 0x07;
+    b = (pixel >> 2) & 0x06;
+      glColor3f(r,g,b);
+      glRectf(x,y,x+1,y+1);
+    }
+  }
+  /* flush GL buffers */
+  glFlush();
+
+  glutSwapBuffers();
+  
+  // Register next redraw in 40ms 
+  // so we get ca.25fps
+  glutTimerFunc(40, timer, 0); 
+}
+#endif
