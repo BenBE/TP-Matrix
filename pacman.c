@@ -255,7 +255,7 @@ void pacman()
 
                 display_sprite_put_P (pacman_pos - 5, 0, 6, 6, display_color_from_rgb ( 255, 255, 0 ), pacman_gefressen_sprite[pacman_status - 4]);
 
-                delay (50);
+                delay_ms (50);
             }
 
             if (pacman_status < 4) {
@@ -286,7 +286,7 @@ void pacman()
                 ende = 1;
             }
 
-            delay (100);
+            delay_ms (100);
         } else {
             //To ensure to finish the animation
             ende = 1;
