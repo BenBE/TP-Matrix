@@ -109,9 +109,9 @@ MV = mv -f
 INC_FLAGS ?= \
     $(addprefix -I,$(INC_DIRS)) $(addprefix -I,$(LIB_DIRS)) -I$(ARD_SRC_DIR)
 INC_FLAGS += -I$(ARD_HOME)/hardware/arduino/variants/standard -I$(ARD_HOME)/hardware/arduino/variants/mega
-INC_FLAGS += -pthread -lX11 -lGL -lGLU -lglut
+INC_FLAGS += -pthread -lX11 -lglut `pkg-config --cflags --libs gl --libs glu`
 ARD_FLAGS = -DF_CPU=$(F_CPU) -DARDUINO=$(ARD_REV)
-ARD_FLAGS += -pthread -lX11 -lGL -lGLU -lglut
+ARD_FLAGS += -pthread -lX11 -lglut `pkg-config --cflags --libs gl --libs glu`
 C_CXX_FLAGS = \
     -Wall -Wextra -Wundef -Wno-unused-parameter \
     -fdiagnostics-show-option -g -Wa,-adhlns=$(BUILD_DIR)/$*.lst \
