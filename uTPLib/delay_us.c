@@ -9,6 +9,7 @@ void delay_us(timebase_t time)
         time_tmp -= 10;
     }
     #else 
-    usleep(time);
+    usleep(time - 2);
+    time_sync();
     #endif
 }
