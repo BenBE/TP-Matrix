@@ -95,7 +95,7 @@ void display_interrupt() {
     r = pixel & 0x07;
     g = (pixel >>= 3) & 0x07;
     b = (pixel >> 2) & 0x06;
-      glColor3f(r,g,b);
+      glColor3b(16*r,16*g,32*b);
       glRectf(x,y,x+1,y+1);
     }
   }
