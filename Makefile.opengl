@@ -247,7 +247,7 @@ $(IMAGE).hex : $(LIB_AR_OBJ) $(SKT_AR_OBJ) $(SKT_PDE_OBJ)
 	${QE} "[LD   ] Linking $@ ..."|sed -e "s/$(shell echo `pwd`|sed -e 's/\//\\\//g')/./g"
 	${QS}$(LD) -lm $(CXX_FLAGS) $(OPT_FLAGS) $(ARD_FLAGS) -L$(BUILD_DIR) \
 	    $(SKT_PDE_OBJ) $(SKT_LD_FLAG) $(LIB_LD_FLAG) \
-	    -lm -o $(IMAGE).elf
+	    -lm -o $(IMAGE).elf $(ARD_FLAGS)
 	${QS}$(OBJCOPY) -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load \
 	    --no-change-warnings --change-section-lma .eeprom=0 $(IMAGE).elf \
 	    $(IMAGE).eep
