@@ -107,5 +107,8 @@ void display_interrupt() {
   // Register next redraw in 40ms 
   // so we get ca.25fps
   glutTimerFunc(40, timer, 0); 
+
+  pthread_cond_signal(&c_time_sync);
+
 }
 #endif

@@ -10,9 +10,9 @@
 
 void *display_refresh(){
   while(1){
-    delay_ms(2);
+    usleep(2);
     if(time_vsynced == 0) {
-      pthread_cond_signal(&c_time_sync);
+      //pthread_cond_signal(&c_time_sync);
       time_vsynced = 1;
     }
   }
