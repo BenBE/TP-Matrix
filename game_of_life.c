@@ -96,7 +96,7 @@ void game_of_life()
     init_random();
     display_buffer_write_set (1);
 
-    for (int i = 0; i < 1024; i++) {
+    for (int i = 0; i < 512; i++) {
         do_game_of_life();
 
 //        if (!memcmp (display[0], display[1], DISPLAY_WIDTH * DISPLAY_HEIGHT) ) {
@@ -135,7 +135,7 @@ void game_of_life()
         recent[0] = curstate;
 
         display_buffer_copy (1, 0);
-        delay_ms (50);
+        delay_ms (25);
     }
 
 }
