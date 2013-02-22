@@ -2,7 +2,7 @@
 
 #include "main.h"
 
-const prog_uint8_t heart_data[9] = {
+const uint8_t PROGMEM heart_data[9] = {
     0x0C, 0x12, 0x21, 0x42, 0x84, 0x42, 0x21, 0x12, 0x0C
 };
 

@@ -2,7 +2,7 @@
 
 #include "main.h"
 
-const prog_uint8_t fire_lookup[12] = {
+const uint8_t PROGMEM fire_lookup[12] = {
     0000, 0002, 0004, 0007,
     0017, 0037, 0047, 0057,
     0067, 0077, 0277, 0377

@@ -38,7 +38,7 @@ extern screen_t display[DISPLAY_BUFFERS];
 extern screen_t* display_active;
 extern screen_t* display_write;
 
-extern const prog_uint8_t font[128][FONT_WIDTH];
+extern const uint8_t PROGMEM font[128][FONT_WIDTH];
 
 extern volatile timebase_t time_frame;
 extern volatile uint8_t time_vsynced;
@@ -76,7 +76,7 @@ static inline color_t display_color_from_rgb(color_t r, color_t g, color_t b) {
 }
 
 void display_sprite_put(coord_t x, coord_t y, coord_t w, coord_t h, color_t c, char *sprite);
-void display_sprite_put_P(coord_t x, coord_t y, coord_t w, coord_t h, color_t c, const prog_uint8_t *sprite);
+void display_sprite_put_P(coord_t x, coord_t y, coord_t w, coord_t h, color_t c, const uint8_t *sprite);
 
 void display_circle_put(coord_t x0, coord_t y0, int radius, color_t c);
 void display_circle_fill(coord_t x0, coord_t y0, int radius, color_t c);
@@ -85,8 +85,8 @@ void font_char_print(coord_t x, coord_t y, color_t color, char c);
 void font_string_printX(coord_t x, coord_t y, color_t color, char *s);
 void font_string_printY(coord_t x, coord_t y, color_t color, char *s);
 
-void font_string_printX_P(coord_t x, coord_t y, color_t color, const prog_uint8_t *s);
-void font_string_printY_P(coord_t x, coord_t y, color_t color, const prog_uint8_t *s);
+void font_string_printX_P(coord_t x, coord_t y, color_t color, const uint8_t *s);
+void font_string_printY_P(coord_t x, coord_t y, color_t color, const uint8_t *s);
 
 static inline coord_t font_char_width(void)	{	return FONT_WIDTH;	}
 static inline coord_t font_char_height(void)	{	return FONT_HEIGHT;	}

@@ -1,9 +1,9 @@
 #ifndef H_MAIN
 #define H_MAIN
 
-#include <Arduino.h>
-
 #include <uTPlib.h>
+
+#include <Arduino.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -4,7 +4,7 @@
 
 #define ABC 12
 //    boolean fonts[ABC][4][4] = {
-static prog_uint16_t fontmap[ABC] = {
+static const uint16_t PROGMEM fontmap[ABC] = {
         0x0000, //{ 0x00, 0x00, 0x00, 0x00 },
         /*{
             {0, 0, 0, 0}, //leer

@@ -8,7 +8,7 @@
 //This saves us ~128 Bytes of RAM for the expense of some performance to access the flash memory
 #ifdef __AVR
 #include <avr/pgmspace.h>
-typedef const prog_uint8_t dcf77_cipherdata_t;
+typedef const uint8_t PROGMEM dcf77_cipherdata_t;
 static inline uint8_t dcf77_cipherdata_read(const dcf77_cipherdata_t *ptr) {
     return ptr ? pgm_read_byte(ptr) : 0;
 }

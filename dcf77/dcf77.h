@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 
+#include <avr/pgmspace.h>
+
 #define DCF77_BLOCKSIZE 5
 
 typedef union dcf77_message {
