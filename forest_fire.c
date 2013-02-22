@@ -66,7 +66,7 @@ void forest_fire()
         }
 
         display_buffer_copy(0, 1);
-        delay_ms(40);
+        delay_ms(20);
     }
 
 }

@@ -1,6 +1,6 @@
 #include "uTPlib.h"
 
-void display_sprite_put_P(coord_t x, coord_t y, coord_t w, coord_t h, color_t c, const prog_uint8_t *sprite)
+void display_sprite_put_P(coord_t x, coord_t y, coord_t w, coord_t h, color_t c, const uint8_t *sprite)
 {
     if(!h)
     {

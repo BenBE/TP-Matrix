@@ -27,10 +27,10 @@ void PlayPong(void) {
         display_buffer_copy(1, 2);
         display_buffer_write_set(2);
         for(coord_t x = 0; x < pts_player1; x++) {
-            display_pixel_set(DISPLAY_WIDTH - DISPLAY_WIDTH / 2 - x - 2, 0, 0007);
+            display_pixel_set(DISPLAY_WIDTH - DISPLAY_WIDTH / 2 - x - 2, 0, ~x&1 ? 0007 : 0002);
         }
         for(coord_t x = 0; x < pts_player2; x++) {
-            display_pixel_set(DISPLAY_WIDTH / 2 + x + 1, 0, 0070);
+            display_pixel_set(DISPLAY_WIDTH / 2 + x + 1, 0, ~x&1 ? 0070 : 0020);
         }
 
         int ball_x = DISPLAY_WIDTH / 2;
@@ -104,9 +104,9 @@ void PlayPong(void) {
         }
 
         if(ball_x < 0) {
-            pts_player2++;
+            pts_player2+=2;
         } else {
-            pts_player1++;
+            pts_player1+=2;
         }
 
         delay_ms(500);

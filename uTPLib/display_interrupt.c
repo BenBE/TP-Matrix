@@ -23,14 +23,17 @@ static inline void pixel_to_matrix(register unsigned char pixel) {
   pixel = PORTB & ~0x28;
   PORTB = pixel += b;
   PORTB = pixel + 0x20;
+__asm__ volatile ("nop" :: );
   PORTB = pixel -= b;
 
   PORTB = pixel += g;
   PORTB = pixel + 0x20;
+__asm__ volatile ("nop" :: );
   PORTB = pixel -= g;
 
   PORTB = pixel += r;
   PORTB = pixel + 0x20;
+__asm__ volatile ("nop" :: );
   PORTB = pixel - r;
 }
 
