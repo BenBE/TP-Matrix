@@ -14,7 +14,7 @@ static const uint8_t PROGMEM nyan_black[] = {
 };
 
 void nyancat() {
-    coord_t pos = -8;
+    int16_t pos = -8;
 
     display_buffer_write_set(0);
     display_clear_black();
@@ -51,7 +51,7 @@ void nyancat() {
         delay_ms(100);
     }
 
-    for(coord_t j = pos; j < pos+2*DISPLAY_WIDTH; j++) {
+    for(int16_t j = pos; j < (pos+2*DISPLAY_WIDTH); j++) {
         display_clear_color(0100);
 
         for(coord_t i = 0; i < pos; i++) {
@@ -80,10 +80,10 @@ void nyancat() {
         delay_ms(100);
     }
 
-    for(coord_t j = 0; j < pos+8; j++, pos+=j&1) {
+    for(coord_t j = 0; j < (pos+8); j++, pos+=j&1) {
         display_clear_color(0100);
 
-        for(coord_t i = j<6 ? 0 : j-6; i < pos; i++) {
+        for(coord_t i = ((j<6) ? 0 : j-6); i < pos; i++) {
             coord_t y = ((i + pos) >> 1) & 1;
             display_pixel_set(i, y+0, 0007);
             display_pixel_set(i, y+1, 0037);
