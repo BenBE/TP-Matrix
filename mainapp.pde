@@ -24,6 +24,7 @@ void loop()
     string_anim (42);
     pacman();
     string_anim (0);
+    cacert();
     heart();
     string_anim (1);
     forest_fire();

@@ -30,6 +30,8 @@ void PlayPong(void);
 void drop(void);
 void drop2(void);
 
+void cacert(void);
+
 #ifdef __cplusplus
 }
 #endif
