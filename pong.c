@@ -2,6 +2,8 @@
 
 #include <uTPlib.h>
 
+#include <stdlib.h>
+
 void PlayPong(void) {
     display_buffer_write_set(0);
     display_clear_black();
