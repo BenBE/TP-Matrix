@@ -25,6 +25,7 @@ void loop()
     pacman();
     string_anim (0);
     cacert();
+    cryptoparty();
     heart();
     string_anim (1);
     forest_fire();

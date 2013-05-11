@@ -14,6 +14,7 @@ void pacman(void);
 void string_anim(char id);
 void heart(void);
 
+void cryptoparty(void);
 void leuchtturm(void);
 void matrix_code(void);
 
