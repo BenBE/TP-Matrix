@@ -55,7 +55,7 @@ void cryptoparty() {
     display_clear_color(BGCOLOR);
 
     if(random_range(0,2)) {
-        for( int i = 0; i<5; i++) {
+        for( int i = 0; i < 5; i++) {
             for( uint8_t frame = 0; frame < sizeof(keyindexH1); frame++) {
                 display_clear_color(BGCOLOR);
                 display_sprite_put_P(10, 0, 19, 4, display_color_from_rgb(0xd9, 0x00, 0xff),crypto); //crypt
@@ -67,7 +67,7 @@ void cryptoparty() {
             }
         }
     } else {
-        for( int i = 0; i<5; i++) {
+        for( int i = 0; i < 5; i++) {
             for( uint8_t frame = 0; frame < sizeof(keyindexV1); frame++) {
                 display_clear_color(BGCOLOR);
                 display_sprite_put_P(10, 0, 19, 4, display_color_from_rgb(0xd9, 0x00, 0xff),crypto); //crypt
