@@ -60,8 +60,13 @@ void cryptoparty() {
                 display_clear_color(BGCOLOR);
                 display_sprite_put_P(10, 0, 19, 4, display_color_from_rgb(0xd9, 0x00, 0xff),crypto); //crypt
                 display_sprite_put_P(18, 4, 19, 4, display_color_from_rgb(0xd9, 0x00, 0xff),party);  //party
-                display_sprite_put_P(10, 4, 7, 4, display_color_from_rgb( 255, 0, 152 ), cryptokey[pgm_read_byte(&keyindexH2[frame])]);
-                display_sprite_put_P(30, 0, 7, 4, display_color_from_rgb( 255, 0, 152 ), cryptokey[pgm_read_byte(&keyindexH1[frame])]);
+
+                uint8_t idx1 = pgm_read_byte(keyindexH1+frame);
+                uint8_t idx2 = pgm_read_byte(keyindexH2+frame);
+
+                display_sprite_put_P(30, 0, 7, 4, display_color_from_rgb( 255, 0, 152 ), (uint8_t *)&cryptokey[0][0] + (sizeof cryptokey[0]) * idx1);
+                display_sprite_put_P(10, 4, 7, 4, display_color_from_rgb( 255, 0, 152 ), (uint8_t *)&cryptokey[0][0] + (sizeof cryptokey[0]) * idx2);
+
                 display_buffer_copy(1, 0);
                 delay_ms(125);
             }
@@ -72,8 +77,13 @@ void cryptoparty() {
                 display_clear_color(BGCOLOR);
                 display_sprite_put_P(10, 0, 19, 4, display_color_from_rgb(0xd9, 0x00, 0xff),crypto); //crypt
                 display_sprite_put_P(18, 4, 19, 4, display_color_from_rgb(0xd9, 0x00, 0xff),party);  //party
-                display_sprite_put_P(10, 4, 7, 4, display_color_from_rgb( 255, 0, 152 ), cryptokey[pgm_read_byte(&keyindexV2[frame])]);
-                display_sprite_put_P(30, 0, 7, 4, display_color_from_rgb( 255, 0, 152 ), cryptokey[pgm_read_byte(&keyindexV1[frame])]);
+
+                uint8_t idx1 = pgm_read_byte(keyindexV1+frame);
+                uint8_t idx2 = pgm_read_byte(keyindexV2+frame);
+
+                display_sprite_put_P(30, 0, 7, 4, display_color_from_rgb( 255, 0, 152 ), (uint8_t *)&cryptokey[0][0] + (sizeof cryptokey[0]) * idx1);
+                display_sprite_put_P(10, 4, 7, 4, display_color_from_rgb( 255, 0, 152 ), (uint8_t *)&cryptokey[0][0] + (sizeof cryptokey[0]) * idx2);
+
                 display_buffer_copy(1, 0);
                 delay_ms(125);
             }
