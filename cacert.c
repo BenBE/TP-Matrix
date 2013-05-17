@@ -15,6 +15,7 @@ void cacert(void) {
     display_clear_black();
     display_buffer_active_set(0);
     display_buffer_write_set(1);
+    display_clear_black();
 
     font_string_printX(12, 1, display_color_from_rgb(17, 86, 140), "CAcert");
 
